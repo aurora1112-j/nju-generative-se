@@ -122,7 +122,7 @@ def render_02(tokens, nav, assets_rel, assets_dir):
     os.makedirs(assets_dir, exist_ok=True)
     md = []
     if nav:
-        md.append('!!! info "阅读导航（对应原视频时间点）"\n')
+        md.append('!!! quote "阅读导航（对应原视频时间点）"\n')
         for ts, title in nav:
             md.append(f"    **{ts}** {title}  ")
         md.append("")
@@ -159,7 +159,7 @@ def render_01(tokens, assets_rel, assets_dir):
     img_n = 0
     for kind, payload in tokens:
         if kind == "timeblock":
-            md.append(f"\n**⏱ {payload}**\n")
+            md.append(f"\n**{payload}**\n")
             pending_img_idx = None
         elif kind == "caption":
             if pending_img_idx is not None:

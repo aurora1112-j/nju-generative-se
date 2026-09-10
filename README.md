@@ -4,7 +4,7 @@
 >
 > Fan-made companion transcripts for the NJU course *Generative Software Engineering* (Yanyan Jiang): timestamped full text with lecture screenshots, searchable and video-aligned.
 
-📖 **在线阅读 / Read online**: <https://aurora1112-j.github.io/nju-generative-se/>
+**在线阅读 / Read online**: <https://aurora1112-j.github.io/nju-generative-se/>
 
 ## 讲次 / Lectures
 
