@@ -1,0 +1,77 @@
+site_name: 生成式软件工程 · 图文转录
+site_description: 南京大学蒋炎岩《生成式软件工程》课程非官方图文转录（fan-made companion）
+site_url: https://aurora1112-j.github.io/nju-generative-se/
+repo_url: https://github.com/aurora1112-j/nju-generative-se
+repo_name: aurora1112-j/nju-generative-se
+edit_uri: edit/main/docs/
+copyright: 课程内容版权归原讲者所有 · 转录文本以 CC BY-NC-SA 4.0 分享
+
+theme:
+  name: material
+  language: zh
+  font:
+    text: Noto Sans SC
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.action.view
+    - content.action.edit
+    - content.tooltips
+    - toc.follow
+
+plugins:
+  - search:
+      lang: zh
+      separator: '[\s\-,!=?.:；，。！？（）【】「」·—…、"\']+'
+  - glightbox:
+      touch_navigation: true
+      loop: false
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+      fallback_to_build_date: true
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+
+nav:
+  - 首页: index.md
+  - 课程转录:
+      - 第 1 讲 · 欢迎来到未来: lectures/01-welcome-to-the-future.md
+      - 第 2 讲 · 提示词工程: lectures/02-prompt-engineering.md
+  - 关于本站: about.md
