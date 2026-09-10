@@ -44,7 +44,7 @@ theme:
 plugins:
   - search:
       lang: zh
-      separator: '[\s\-,!=?.:；，。！？（）【】「」·—…、"\']+'
+      separator: "[\\s\\-,!=?.:；，。！？（）【】「」·—…、\"']+"
   - glightbox:
       touch_navigation: true
       loop: false
