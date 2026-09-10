@@ -45,9 +45,7 @@ plugins:
   - search:
       lang: zh
       separator: "[\\s\\-,!=?.:；，。！？（）【】「」·—…、\"']+"
-  - glightbox:
-      touch_navigation: true
-      loop: false
+  - glightbox
   - git-revision-date-localized:
       enable_creation_date: true
       type: timeago

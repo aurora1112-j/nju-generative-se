@@ -28,7 +28,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mkdocs-material jieba \
+          pip install "mkdocs<2" mkdocs-material jieba \
             mkdocs-glightbox \
             mkdocs-git-revision-date-localized-plugin
 

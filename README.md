@@ -36,7 +36,7 @@ The course teaches generative software engineering — and this site is built th
 ## 本地构建 / Build locally
 
 ```bash
-pip install mkdocs-material jieba mkdocs-glightbox mkdocs-git-revision-date-localized-plugin
+pip install "mkdocs<2" mkdocs-material jieba mkdocs-glightbox mkdocs-git-revision-date-localized-plugin
 mkdocs serve   # http://127.0.0.1:8000
 ```
 
