@@ -1,6 +1,6 @@
 # 生成式软件工程 · 图文转录
 
-> NJU《生成式软件工程》（蒋炎岩）非官方图文转录 —— 带时间戳的全文 + 课堂截图，可搜索、可对照视频。
+> NJU《生成式软件工程 26fall 》（蒋炎岩）课程录屏图文转录，包含带时间戳的全文 + 课堂截图 + 原视频链接。
 >
 > Fan-made companion transcripts for the NJU course *Generative Software Engineering* (Yanyan Jiang): timestamped full text with lecture screenshots, searchable and video-aligned.
 
@@ -17,7 +17,7 @@
 
 ## 为什么 / Why
 
-课程讲生成式软件工程，本站的生产管线也是生成式的：ASR 转写 → Agent 整理 → PDF → 自动拆解成网页。**用课上的方法，把课本身变成开源书。**
+课程讲生成式软件工程，本站的生产管线也是生成式的：ASR 转写 → Agent 整理 → PDF → 自动拆解成网页。
 
 The course teaches generative software engineering — and this site is built the same way: ASR → agent-assisted cleanup → PDF → scripted conversion into this website.
 
