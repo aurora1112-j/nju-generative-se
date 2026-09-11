@@ -1,6 +1,6 @@
 # 生成式软件工程 · 图文转录
 
-> NJU《生成式软件工程 26fall 》（蒋炎岩）课程录屏图文转录，包含带时间戳的全文 + 课堂截图 + 原视频链接。
+> NJU《生成式软件工程 26fall 》（蒋炎岩/绿导师）课程录屏图文转录，包含带时间戳的全文 + 课堂截图 + 原视频链接。
 >
 > Fan-made companion transcripts for the NJU course *Generative Software Engineering* (Yanyan Jiang): timestamped full text with lecture screenshots, searchable and video-aligned.
 
