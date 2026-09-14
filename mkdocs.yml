@@ -69,4 +69,5 @@ nav:
   - 课程转录:
       - 第 1 讲 · 欢迎来到未来: lectures/01-welcome-to-the-future.md
       - 第 2 讲 · 提示词工程: lectures/02-prompt-engineering.md
+      - 第 3 讲 · 软件仓库管理: lectures/03-repository-management.md
   - 关于本站: about.md

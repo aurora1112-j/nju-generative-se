@@ -8,6 +8,7 @@
 | --- | --- | --- | --- | --- |
 | [第 1 讲](lectures/01-welcome-to-the-future.md) | 欢迎来到未来 | 2026-09-08 | 01:39:23 | [BV1qAa3z2EvA](https://www.bilibili.com/video/BV1qAa3z2EvA/) |
 | [第 2 讲](lectures/02-prompt-engineering.md) | 提示词工程 | 2026-09-09 | 01:38:26 | [BV1CQt365EzW](https://www.bilibili.com/video/BV1CQt365EzW/) |
+| [第 3 讲](lectures/03-repository-management.md) | 软件仓库管理 | 2026-09-10 | 01:40:13 | [BV1kybV6DE47](https://www.bilibili.com/video/BV1kybV6DE47/) |
 
 *课程每周二 10:00-12:00 更新，转录随讲次持续追加。*
 
