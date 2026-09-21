@@ -1,0 +1,1043 @@
+<!DOCTYPE html><html lang="zh" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="南京大学蒋炎岩《生成式软件工程》课程非官方图文转录（fan-made companion）">
+      
+      
+      
+        <link rel="canonical" href="https://aurora1112-j.github.io/nju-generative-se/lectures/04-repository-management-2/">
+      
+      
+        <link rel="prev" href="../03-repository-management/">
+      
+      
+        <link rel="next" href="../../about/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第 4 讲 · 软件仓库管理（二） - 生成式软件工程 · 图文转录</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue-grey">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="生成式软件工程 · 图文转录" class="md-header__button md-logo" aria-label="生成式软件工程 · 图文转录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            生成式软件工程 · 图文转录
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第 4 讲 · 软件仓库管理（二）
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue-grey" aria-label="切换到深色模式" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey" aria-label="切换到浅色模式" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aurora1112-j/nju-generative-se" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    aurora1112-j/nju-generative-se
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01-welcome-to-the-future/" class="md-tabs__link">
+          
+  
+  
+  课程转录
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本站
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="生成式软件工程 · 图文转录" class="md-nav__button md-logo" aria-label="生成式软件工程 · 图文转录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    生成式软件工程 · 图文转录
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aurora1112-j/nju-generative-se" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    aurora1112-j/nju-generative-se
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    课程转录
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    课程转录
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-welcome-to-the-future/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 1 讲 · 欢迎来到未来
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-prompt-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 2 讲 · 提示词工程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-repository-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 3 讲 · 软件仓库管理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 4 讲 · 软件仓库管理（二）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="4">第 4 讲 · 软件仓库管理（二）<a class="headerlink" href="#4" title="Permanent link">¶</a></h1>
+<div class="admonition quote">
+<p class="admonition-title">本讲信息</p>
+<p><strong>课程</strong>：南京大学《生成式软件工程》（蒋炎岩）
+<strong>原视频</strong>：<a href="https://www.bilibili.com/video/BV1Q6en6NEUo/">B 站 BV1Q6en6NEUo</a> · <strong>时长</strong>：01:38:29
+<strong>说明</strong>：非官方 fan-made 转录，仅作学习用途；内容版权归原讲者所有。转录错误以原视频为准。</p>
+</div>
+<hr>
+<p><strong>[00:00:00]</strong> 我们上周讲了一点版本管理，我们这周继续讲版本管理。然后我发布了一个作业，然后按照之前的说法，就是这一门课所有的作业大家都是选做自愿完成。然后最后当然肯定会验收，因为最终也许学校会让我们提交一个成绩，那么大家就会交一些链接，然后由我的机器人来给大家评分。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_01.jpeg" data-desc-position="bottom"><img alt="画面 00:00:00" src="../assets/04/04_01.jpeg"></a></p>
+<p><strong>[00:00:27]</strong> 然后我们的第一个lab算是一个比较时髦的需求，叫会成长的个人助手。然后他现在对大家的要求都是不限，你们想怎么做就怎么做，然后最好还是可以web一个。而且我今天应该会课后会留时间，我自己就来web code一个。然后我会告诉大家，如果你直接让他web的时候，你会遇到什么样的小坑。</p>
+<p><strong>[00:00:52]</strong> 然后除了今天以外，我下一周而不是下一周是这周日要调休周二的课，所以这周日还有课。然后会讲软件的架构，然后会把它连起来。然后这个例子就是你们特别每个同学都会需要的，我自己自己也有的，就是一个能够持续为你工作的个人助手。然后你可以这些需求是供你参考的。当然如果你实现它的话，会有一点点成就感，对吧？比如说你的学习的数据库，你你们这个学期可能会在上一些专业必修课，可能计算机网络或者概率这类比较困难的专业课。然后你可以把你的专业课的资料放到你的个人数据库里，或者你参与了研究组的课题的时候，你可以把你们研究组的论文相关的文献教科书这些整理成你的个人的数据库，这是一种形式的数据恐布线。你也可以把你自己的个人信息？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_02.jpeg" data-desc-position="bottom"><img alt="画面 00:01:00" src="../assets/04/04_02.jpeg"></a></p>
+<p><strong>[00:01:45]</strong> 我不知道大家是不是已经填表已经填的很烦了。每次你填表的时候都是给你一个DC的表格，然后在那个表格里要填姓名、学号、身份证号，然后有时候是个人简历。然后我现在已经把这些所有的事情都交给agent了，就好把这个东西填了。就觉得从往以往到今年有一个非常大的效率进步。我今天我记得我大概在疫情的时候，我招过一个学生，然后研究生就在我这里做了三年，然后做了一个什么就是自动填表系统，我们就填觉得填表很烦。然后等到他毕业的时候，突然有了ChatGPT然后又很慌，他他做他觉得他做事情马上就要被替代了。我说不要紧，你赶快答辩，然后就可以毕业了。对，然后这世界就是发展的这么快。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_03.jpeg" data-desc-position="bottom"><img alt="画面 00:02:00" src="../assets/04/04_03.jpeg"></a></p>
+<p><strong>[00:02:32]</strong> 然后在个人数据库的基础上，你可以把数据库和你的email的邮箱关联起来。如果有也就有可能的话，比如说我在两周以后会在半夜给大家发邮件，然后你的agent的可能会把邮件回给我，就实现一个always on的一个在后台。你们也许买一个很小的那种嵌入式的小设备，一两百块钱你就可以在你的宿舍里面持续的跑你的agent loop这样。然后以及用你的信息可以办理一号的事务，就像我上课的时候。对，这就是一句话，你直接一个像agent的紫禁城的调用就可以。然后如果你们有兴趣的话，可以做一个手机端的联动，也许是一个网页，也许是一个别的，甚至是一个苹果的app或者是一个android app。就你只要让agent去做，他会自己去帮你下好所有需要的东西，然后把你要的东西给给给给做出来。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_04.jpeg" data-desc-position="bottom"><img alt="画面 00:03:00" src="../assets/04/04_04.jpeg"></a></p>
+<p><strong>[00:03:26]</strong> 对嗯，然后为什么要布置这样的实验呢？就看起来就所有的任务都在AI的能力范围之内，对吧？但是如果你直接我今天会试的，我没有试过直接把这个实验要求直接让AI去做。他在一开始就会做出很多可能，他认为看起来也合理的决定。但是这些决定会让你那项目的维护变得越来越困难，最后直到陷入焦油坑。所以我觉得是每个同学都有都有必要体验一下软工程里面的焦油坑。也就是你当你的a sla开始不断的消耗你的token的时候，你终于会有一天会下定决心，好，我要把这个项目删掉，从头重做，或者就回退到从某一个很早期的版本开始重头做。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_05.jpeg" data-desc-position="bottom"><img alt="画面 00:03:39" src="../assets/04/04_05.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_06.jpeg" data-desc-position="bottom"><img alt="画面 00:04:00" src="../assets/04/04_06.jpeg"></a></p>
+<p><strong>[00:04:14]</strong> 这是我们这个实验可能想要告诉大家的事情。好，当然我相信这个项目对每个同学来说都是有用的这是我也是我设计实验的初衷。我大概会这样，我可以提前预告一下，我的下一个lab会和这个lab有非常大的关联，而且你们暂时猜不到。然后，你会发现你就你现在la 1，比如说那些实验要求你都做好了，然后他成为一个非常舒适的个人助手。然后我怕给你加一个需求，然后这个需求和前面所有都是关联，并且有一定的冲突，然后你的意见就去改，然后越改越崩溃，就有一个这样的体验。所以大家可以期待一下这个后面的la所以如果你你不做，比如说你现在live一选择躺倒，或者就不管他让AI直接就做，下一次再把这个做的直接删掉。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_07.jpeg" data-desc-position="bottom"><img alt="画面 00:05:00" src="../assets/04/04_07.jpeg"></a></p>
+<p><strong>[00:05:11]</strong> 可能就没有这个软件工程的体验了，大概是我想要做这样的一个，好，我们回顾一下，我们上节课讲的是软件的项目管理？项目我们说项目是各种文件的集合，你的intent，一些设计文档。你的README都在都在你的项目里。所以其实我不喜欢那种AI写出来那个非常长的这个README对吧？我喜欢的是对我来说，我觉得README应该就写一下你在设计这个项目的时候的最初的初衷？你想做一个什么样的产品，然后这个产品能达到什么样的效果，可能配两个screen shots，以及你最重要的那些设计。有点什么感觉呢？有一天你突然想了一个非常好的点子，然后你真的想用它去挣一个亿。</p>
+<p><strong>[00:05:58]</strong> 然后你想挣一个亿的时候，你组建一个创业团队，你要说服你那个computer science里面？比如说你要说服我出来干，然后你就只其实只需要一个比较短的README对吧？这是你的intent，你想做这个东西。那剩下比如说我有架构的能力，我有写代码能力的，我可以把剩下东西都给你补出来。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_08.jpeg" data-desc-position="bottom"><img alt="画面 00:06:00" src="../assets/04/04_08.jpeg"></a></p>
+<p><strong>[00:06:17]</strong> 你不需要知道这个软件系统是怎么样，对吧？他的specification是什么？他用什么样的数据库，怎么样支持这个用户从1到10到100到100万到1亿？这个价格你可能没有computer science的知识，但是你不需要有，你只要有个最原始的设计，那in然后再到spe就用我刚才说的一些我要选什么样的数据库，我甚至要选什么样的编程语言，然后我的项目的结构是什么等等各种各样的。小到比如说每个模块的接口都属于，然后再到code implementation，他现在都在这个项目里，那有这样的项目以后，很自然的你就你就需要一个容器，把这些各种各样的文件给管理出来。</p>
+<p><strong>[00:06:59]</strong> 我们说大家用文件系统来管理项目，其实真的就是图方便。因为你回到1950年，1960年的时候，操作系统给你的存储功能就只有文件，它没有别的。就那个时候数据库还关系型数据库还没有发明出来。所以所有的程序员他别无他法，只能把你的项目以文件的形式存进来。所以这更多时候是一个历史的对吧？由历史不停的往后涨。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_09.jpeg" data-desc-position="bottom"><img alt="画面 00:07:00" src="../assets/04/04_09.jpeg"></a></p>
+<p><strong>[00:07:27]</strong> 导致的原因。我自己是觉得文件系统可能不是组织项目的正确的方式。因为文件系统其实丢失了很多文件不适合表达的信息，就是有些有些信息其实是比较容易表达的对吧？比如说我的intent spec这种，就我一条文档这个地方我是怎么想的，或者这个测试用例是什么，我输入是什么，输出是什么。然后我要 assert 在程序的运行过程中，什么东西不能被违反。但是你马上就会发现有很多隐藏的关联在项目里面是没有的。我举一个例子，你们你经常会在AI就是AI在写代码的时候，现在AI会稍微好一点，有时候也不会你让他说把这个实现的什么方法，从比如说你要把linked list换成是一个更高效的tree的结构去优化性能，对吧？这是一个很常见，你突然发现这个性能不够的，然后你让AI去做AI就***给你代码给改了。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_10.jpeg" data-desc-position="bottom"><img alt="画面 00:08:00" src="../assets/04/04_10.jpeg"></a></p>
+<p><strong>[00:08:26]</strong> 但是你没有想到的是，你可能在其中的某一个文件里写了一个文档里Markdown里写了一个我这个项目是用这个数据是用linked list的管理的。然后在项目当中其实你的这个文档和你的代码和测试之间就形成了一个关联，对吧？它就形成了一个你在写的时候，你写文档的时候可能还没有代码，所以你就先写的那个文档，你随手一写，这是一个linked list。但是一旦你的代码实现了这个关，又没有强行的联系上，这就是一个技术债technical debt对。因为以后随着文档和代码的不断的向前推演，他们的不一致只会越来越多，不会越来越少。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_11.jpeg" data-desc-position="bottom"><img alt="画面 00:09:00" src="../assets/04/04_11.jpeg"></a></p>
+<p><strong>[00:09:14]</strong> 然后这个软件陷入一个维护的泥潭了。因为后面你拿出一个代码，甚至AI拿出看到一份代码，那到底是文档说的对还是代码说的对？你跟他聊天的那个历史没有了对吧？你那个chat已经消失了，你换了一台电脑对吧？然后你那个git里面可能还有一些change的日志。但是你你当你到最后的时候，你真的就不知道到底是代码对还是文档，对吧？</p>
+<p><strong>[00:09:41]</strong> 然后其实在软件工程里面，这是一个研究的非常长时间的问题，叫traceability。你看这是这已经是2014年的时候，他review的一些更老的时候的文章，对吧？它就是software traceability可追踪性。所谓的追踪就是你的就他发现我们文件真的只是图保存在文件系统里方便。那么在一个软件项目当中的各种各样的测试用例文档，哪怕就文档中间一行代码，它之间的这个关联是什么？我们能不能在这个软件系统的演进过程中仍然维持它，对吧？这其实是一个非常软件工程的软件工程的问题。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_12.jpeg" data-desc-position="bottom"><img alt="画面 00:10:00" src="../assets/04/04_12.jpeg"></a></p>
+<p><strong>[00:10:28]</strong> 所以很多时候我们觉得蛮有意思的，文件系统将错就错了。我们大家最后总有一天会发现，你用文件系统来管理代码，你受不了了，对吧？打个压缩包发布，打压缩包发布，然后打压缩包发给你的合作者，这件事情已经维护不下去了，对吧？维护不下去了，所以就有SVN 有了Git。那下一个是什么？大家有没有有没有想过下一个是什么？我今天一会儿会讲它的下一另外一个可能设计比 Git 要好一些，更好用的一个版本控制工具。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_13.jpeg" data-desc-position="bottom"><img alt="画面 00:11:00" src="../assets/04/04_13.jpeg"></a></p>
+<p><strong>[00:11:05]</strong> 但我同时也觉得，就刚才说到traceability，其实如果以后我们再也都不要写代码了，那软件它就不应该是一个就是像现在我们在git里面管理的样。我们好多文件，什么什么README.md然后什么hello.c，还有一个什么docs 下的什么文档。后其实如果如果所有的这些东西，我们人都不几乎不管了。那我们有没有可能我一直在想，就等这件未来到来，我们把这里面软件或者说部件之间，就也许我们还是需要文档，但我们的文档可能是好多个切片对吧？好多切片就把它们变成好多的对象object或者是entity。</p>
+<p><strong>[00:12:00]</strong> 然后比如说这个文档和文这个实现之间就有一个关系，它实现了这个代码，实现了这个文档，对吧？然后我可能有一个测试用例，然后这个测试用例也有这个文档，那这个文档和测试用例又关联起来了。然后这个测试用例是和这个代码的这部分实现是关联起来的，然后这个文档又和这个文档是关联起来的。然后你看这是一个完全结构化的东西，没有办法在文件系统里一个树状的形式表达，对吧？这是一个就随便连接的一个图，有cycle的图graph。那这个东西比如说我可以把它放到一个数据库里，对吧？叫这个就叫Rio点DB显然人类就没有办法用现在的这个unix的世界里面的工具去维护这样的一个repository了。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_14.jpeg" data-desc-position="bottom"><img alt="画面 00:12:00" src="../assets/04/04_14.jpeg"></a></p>
+<p><strong>[00:12:48]</strong> 但是不要紧，我们应该怎么或者说我们应该怎么解决呢？用魔法打败魔法，人类理解不了东西。我们只要训练AI就他只要有强化学习的反馈信号，我们就可以训练AI AI能够理解这个 repo所以我们要干的是什么呢？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_15.jpeg" data-desc-position="bottom"><img alt="画面 00:13:00" src="../assets/04/04_15.jpeg"></a></p>
+<p><strong>[00:13:03]</strong> 这就是一个非常大的项目，什么Linux内核和数据库，或者你们想做的一个价值一个亿的产品。好，那每次你就说好AI因为你你你也不太可能说一下子就说我要把这个产品直接变成另外一个产品了。一当你比如说这个软件系统已经在工作了，那你一般来说就是要给它增加一个功能，修改一个功能，对吧？这就跟Git的 philosophy很像，对吧？</p>
+<p><strong>[00:13:27]</strong> Git管理了文件目录快照和快照之间的关系，你的Git希望我们能够小步前进，对吧？我每做一件事情，我fix一个bug，我改一个文档，我都产生一个commit。然后这样我就可以在多个人之间协作，每个人可以自己产生自己的commit。然后我们可以用像rebase merge啊这个fast forward这些或者是普通的这种merge来创建一个可追踪的整个项目的修改历史。如果我们以后也不要文件，就也这种也许还可以用文件系统来管理，那我们要的就是我们可以让AI自动维护所有的这个artifact软件，artifact之间的一致性，这个artifact的之间一致性就比如说代码和文档必须要一致。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_16.jpeg" data-desc-position="bottom"><img alt="画面 00:14:00" src="../assets/04/04_16.jpeg"></a></p>
+<p><strong>[00:14:15]</strong> 我文档说这是linked list，我的实现里面必须是linked list。然后我的这个test case测试用例，我我我文档里面说我要有abc三个方面的测试，那我这个test case就必须要有abc它都是关联起来的。然后，你想从Git里面我们知道我们希望小步前进，对吧？我们希望小步前进。</p>
+<p><strong>[00:14:34]</strong> 同样的当我们谈要做。</p>
+<p><strong>[00:14:36]</strong> 一小步的时候，其实我们知道这一小步是干什么的。所以你可以chat对吧？你可以跟AI chat说我现在要我现在发现它有个bug，或者我做了一个产品，比如说我现在今天对这个幻灯片样式不满意，那这就其实就是一个小步。后，这个时候一个大型的软件系统里面，绝大部分的内容跟这个小步都是没有关系的对吧？比如说我当当我弹说我对这个幻灯片的样式不感兴趣的时候，我比如说大家可以看直接看我的看我这个 repo 对，看一下顶层的结构对吧？我有我有些assets，然后甚至还有这个点cache，有有缓存的系统，然后有这个P1、P2、P3、P4、P5，然后有一些脚本等等。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_17.jpeg" data-desc-position="bottom"><img alt="画面 00:15:00" src="../assets/04/04_17.jpeg"></a></p>
+<p><strong>[00:15:22]</strong> 任何一个软件系统，当你只做一小步的时候，你就只需要看到这个软件系统的一小部分，大部分东西应该是无关的。好，既然是无关的，我们就可以让AI根据我们的chat把和我相关的东西给摘出来，对吧？他可以知道，我现在需要的是这个文件，这个test case和这个文档，是其他的东西都不需要了。然后你想AI有什么能力？AI有动态生成任何内容的能力，everything is code对吧？Content as code, code可以表达任何东西。所以AI可以根据我的chat生成一个和我要改的这一小步相关的。We有一个视图，在这里你看你们学到的个各种系统里面的概念还是有用的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_18.jpeg" data-desc-position="bottom"><img alt="画面 00:16:00" src="../assets/04/04_18.jpeg"></a></p>
+<p><strong>[00:16:12]</strong> 就因为不是所有的同学都学过数据库，对吧？数据库里面有一个叫 view 的概念。他说我们我我们的数据数数据就在这儿了。但我可以创建一个不一样的查询，可以把它以另一个形式展示出来。对，就是这个很简单的想法，我希望把这些数据以另外一个形式给展现出来。但比如说当我看到的时候，我就看到的不是这些代码文档diff这些，而是一个可视化的一个看板。然后这个看板上面大概说了列出了和我这个小步相关的一些东西，然后问我要改什么。然后我一把改完了以后，我同样的还是从一个从一个V0到V1.</p>
+<p><strong>[00:16:52]</strong> 它还。</p>
+<p><strong>[00:16:52]</strong> 是一个 Rio点滴B但是这一小步就会把这些相关联的东西，比如说我要增加一种类型的测试用例，那它就会在这个测试用例里面，比如说我还是画一个这样的结构对吧？好，那他可能就会在这些地方加一些测试用例，这个地方加一些测试用例，这个地方加一些测试用例，然后有些地方可能要改掉，它就从一个一致的状态，就是各种错综复杂的关系，后做一次小步的修改到下一个版本。这样我们就好像软件工程就又变了，彻底变了。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_19.jpeg" data-desc-position="bottom"><img alt="画面 00:17:00" src="../assets/04/04_19.jpeg"></a></p>
+<p><strong>[00:17:27]</strong> 我觉得这是一个未来有可能发生的，就是在AI内部它是这样生产软件，然后从此以后我们也就再也不要看代码了。我觉你们看到现代的这种现代ID比如说我我我其实还蛮讨厌的，是他现在就打开默认就是agentmode，然后agent mo就是原来的那个，我们熟悉那个ID它就没有了。然后强迫你用一个像chat类似于chat的方式去跟他沟通。但因为我还是相对来说比较精通古法编程的，有时候我还是对代码有一些掌控欲，可能是不好的，这个可能是不对的。但是未来可能会是这这可能是一个途径。然后你们当然我觉得同学们肯定也会焦虑的那如果未来这件事情真的有可能发生，而且就可能一两年以后大就就真的有一个公司把这东西做出来了，那我们学那么多多东西还怎么办？对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_20.jpeg" data-desc-position="bottom"><img alt="画面 00:18:00" src="../assets/04/04_20.jpeg"></a></p>
+<p><strong>[00:18:21]</strong> 然后其实你发现在我们思考，就在创造这些东西的过程当中，我们用的都是你们学习的这些经典集大成的computer science的课程。我刚才说的数据库里的视图？数据我用的借用了数据库的概念实体和关系，然后我借用了Git？我用Git就这个模型没有变。Git长期的开发经验说候，我们要一步一步向前。如果在这个模型底下我们是大步向前的那就惨了。对，当然也有可能发生就是模型面非常强，一个非常大型的项目，然就一步啪就变成下一个了。</p>
+<p><strong>[00:18:56]</strong> 这个怎么做？我们现在还不知道，但是至少在初期我们可能还是要沿用过去的大家积累的软件工程智慧去小步向前，然后通往那个极乐的世界。但我还是相信这个极乐世界有可能确实有可能是能。是能导的对所以这就这就引发了一个我觉得在大学里面，我觉得蛮有意思的一个评论。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_21.jpeg" data-desc-position="bottom"><img alt="画面 00:19:00" src="../assets/04/04_21.jpeg"></a></p>
+<p><strong>[00:19:25]</strong> 这个同学应该是已经毕业了，然后已经毕业。因为我上节课说我问那个同学们rebase，然后大家都不知道什么是rebase。然后他raised 一个 valid point，他说学生时代大多数人是不会和他人共同合作的，也就是做作业，所以rebase用的场景就很少正确。这个point是是是对的，就你们做作业的时候确实不会。然后我的回应是大概是这样的。但是如果你真的去往这个外面的世界去走一走的话，这个互联网开发者社区铺天盖地都是文档。</p>
+<p><strong>[00:20:00]</strong> 所以你一定会在有一天你会留意过别人的项目，会看到一个叫 CONTRIBUTING.md。然后一般来说这个可能你马上就问这个对吧？你们有没有同学问过？Tree没关系，错了就错了。我没有对吧？我没有他。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_22.jpeg" data-desc-position="bottom"><img alt="画面 00:20:00" src="../assets/04/04_22.jpeg"></a></p>
+<p><strong>[00:20:25]</strong> 仓库根目录下的一份贡献者指南，通常回答我怎么参与这个项目。然后你看它里面就有这些，就项目的总体的结构，然后分支提交信息PR的规范和流程。那你如果看过就如果你你看过很多的项目的computer m你比如说你就随手打开看一眼，然后如果你发现里面东西都知道了，好，那你就知道了。如果你不知道，比如说有一天你一定会看到一个项目里面有一个说说我们你必须要在你自己的分支上rebase，你禁止你你这种我要保持线性历史，禁止你直接创建那种分叉的merge，你，就会知道rebase是是干什么的。然后他它现在是什么呢？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_23.jpeg" data-desc-position="bottom"><img alt="画面 00:21:00" src="../assets/04/04_23.jpeg"></a></p>
+<p><strong>[00:21:09]</strong> 现在我们的社会变得太快了，所以有一种学生思维其实不是批评批评大家。就是因为你们上高中的时候就是这样的，在高中的时候老师不教的就是你不需要会的对吧？考试不考的就是你不用学的。非常明显的一个你们为了升学的利益最大化，这个是正确的。没有没有错。然后在你们到大学以后，你们如果还带着这个思维的话，你你你就你就会会有这样的对吧？这是这样的gap，就是你一种新人类和旧人类之间的gap。</p>
+<p><strong>[00:21:41]</strong> 当然我相信每一个同学也还是可以成为成为新人类的。然后你只需要去有一些注意力，去注意到更多的东西。因为现在我有一个危机，就是AI时代的斩杀线以下的价值就全部归零。当然我觉得现在展现可能还展不到个各位985同大学这个computer science专业的同学。但是可能比如说那些低级的那种低级智力劳动，对吧？比如说会计从业者，好像我看过一个报道说中国可能是不是有1000万还是有多少会计从业者。那那这个行业里面顶端的人肯定暂时还是没有威胁的。但是在底下的大量的人都都面临被agent的替代斩杀的危险。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_24.jpeg" data-desc-position="bottom"><img alt="画面 00:22:00" src="../assets/04/04_24.jpeg"></a></p>
+<p><strong>[00:22:27]</strong> 所以你们需要在这些经典的课程上，不管是什么操作系统、编译器这些，然后还是软件工程对吧？这里面有些软件工程的智慧，你们学到一些经典的东西，然后最终形成你们自己的自己的理解。对，这是一些评论和复习Git。</p>
+<p><strong>[00:22:47]</strong> 好，我们继续回到软件工程。不管是这个模型，就是我说我畅想一下未来会发生什么，还是我们就是Git对吧？Git Git他管理的是快照，也就是一个目录对吧？整个一个可能是也就是这样的一个东西的一个快照。好，我可以在快照上面做一个开发对吧？做一个开发他要求小步，我现在有一个两个开发者，一个是A一个是B我们就可以独立的在这两个上面做做开发。然后好，那这个东西是commit。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_25.jpeg" data-desc-position="bottom"><img alt="画面 00:23:00" src="../assets/04/04_25.jpeg"></a></p>
+<p><strong>[00:23:34]</strong> 然后如果你要做这个时候，如果你要想把它合起来，那在git里面，在Git的这个原始的模型里面，它rebase相对来说是不那么提倡使用的。它是说好你会创建一个两路的merge，它有两个parent继承了这两个的修改。但是这又带来一些问题，比如说这个merge完，比如说merge是由 A 来A来干的那这个merge里面的一些内容，就由 B 写的这些内容它就变它作者变成A了。它其实有一个隐藏的作者修改对吧？比如说B在这儿加了一行，这个可能还能还还能追溯到B就如果发生冲突。比如说发生冲突的时候，在resolve的时候，那冲突完了以后，这个甚就是由这是由A完成的，就是A完成的那这个就B改的代码，最后ownership又归到了A所以这会带来一些相对来说有一点小小的小麻烦。然后rebase解决了这个问题rebase。我还是横过来画这个，是不是第一排的同学有点看不到。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_26.jpeg" data-desc-position="bottom"><img alt="画面 00:24:00" src="../assets/04/04_26.jpeg"></a></p>
+<p><strong>[00:24:47]</strong> 如果我现在有两个历史，那比如说我现在我我现我现在改了，这是A同学改了两份，做了两次的提交，得到两个快照ok是他一他好，然后我这个时候另外一个同学开始改。好，那rebase做了一件什么事呢？Rebase说的是比如说A先改了文档，然后再加了测试，然后我B加了一个feature，然后又加了一个测试。那这个时候我不是直接把他们两个东西合并成一个说把这两条线路并起来的提交，而是我试图先把这个feature能不能在，我先要试一试有没有可能在这个A的后面把这个feature加上。如果加上了，ok那就成功了，这就成功了。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_27.jpeg" data-desc-position="bottom"><img alt="画面 00:25:00" src="../assets/04/04_27.jpeg"></a></p>
+<p><strong>[00:25:56]</strong> 好，但是这是有一个很大的风险的，就是因为我可能在这个里面加入了一个测试用例，然后这个测试用例和这个feature就是不兼容的对吧？这是有可能的，或者甚至就是他们就改了同一个地方，我就做两个完全不兼容的东西，那这个时候它是有可能失败的。如果成功这就比较好，对吧？那我再把test放过来，如果成功，那么它就一路相当于如果就也就是说这两条线上那面的修改完全没有任何冲突，那我就可以一路把它合并过去，变成一个线性的历史。但是一旦发生冲突，这是非常危险了，为什么呢？一旦冲突你就需要resolve对吧？你会进入一个rebase的模式。你们如果如果进入过这个模式，你会发现瞬间自己就不知道应该怎么办了。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_28.jpeg" data-desc-position="bottom"><img alt="画面 00:26:00" src="../assets/04/04_28.jpeg"></a></p>
+<p><strong>[00:26:44]</strong> 然后这时候你就打开你的agent说，我现在在我先我我我发生了什么对吧？然后agent会细心的解释解释给你。更麻烦的是你就算是把这个东西搬过来了，feature搬过来了，你可能搬test的时候又要失败。</p>
+<p><strong>[00:27:00]</strong> 然后你还需要。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_29.jpeg" data-desc-position="bottom"><img alt="画面 00:27:00" src="../assets/04/04_29.jpeg"></a></p>
+<p><strong>[00:27:02]</strong> 再把test这个再搬过来。而且每一次你都会创建一个新的提交。也就是说这是一个commit，它有一个ID这commit有ID每个 commit 都有ID那如果你是一个这样的两路的merge，那所有的这些ID都保留了，你会创建一个新的ID但是因为你是rebase的rebase，每次这样的rebase就会创建一个新的commit。因为他这个快照，本来这个快照的base在这儿对吧，这个commit的base在这儿，所谓的rebase你就知道rebase rebase它的base要改掉，要把这个base改到这里来rebase，那你会创建一个新的ID。每次都会创建一个新的ID然后这个历史就变了。然后你会感觉到这里有一点点轻微的不一致，对吧？就觉得你好像不想不是完全要想想这样去去管理软件。因为我们关心的是修改，也就是我希望的是把这个修改搬过来，然后在git里面修改是用commit来替代的对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_30.jpeg" data-desc-position="bottom"><img alt="画面 00:28:00" src="../assets/04/04_30.jpeg"></a></p>
+<p><strong>[00:28:20]</strong> 说好我现在有一个commit，然后这个commit和它的parent之间的关系就叫一个修改。它没有一个专门的叫change的对象，所以他它它是用commit来代替修改，那可能绝大部分的情况都还能满足。但是如果我们把change也变成first-class citizen，会发生什么呢？你就发明了下一代更好用的版本控制系统，对吧？就是说你你我我不仅可以有有committed的ID甚至这个 jj，它是和Git底层完全兼容的，你你你可以直接把它当Git用。然后但是它增加了增加了一个叫做change的概念。也就是每一个这个东西。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_31.jpeg" data-desc-position="bottom"><img alt="画面 00:29:00" src="../assets/04/04_31.jpeg"></a></p>
+<p><strong>[00:29:14]</strong> 每个这样的东。</p>
+<p><strong>[00:29:16]</strong> 西change它都可以算一个一个change。然后它可以把好多的change，比如rebase的时候，它会把change直接把change搬过来，然后趁至还是有可能就冲突是解决不了的。如果我在rebase的时候，我要我要冲突，这是解决不了的。但是因为它有这个change的object，就change这个概念，所以它可以把这些change一度带下来，生成一个直接rebase到这里。但是里面引入了好多冲突，就你它还是应用了Git的那个冲突冲突那个记录。但你看它的里面有一套自己的记录方式，把所有的这些change的冲突也都塞进去。然后你可以在这里相当于把它们搬过来，然后在这里再resolve它的底层的模型没有变，但是你用起来会舒服很多。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_32.jpeg" data-desc-position="bottom"><img alt="画面 00:30:00" src="../assets/04/04_32.jpeg"></a></p>
+<p><strong>[00:30:06]</strong> 然后它有一个很好的特点，它不需要staging area，就是你你你在你在Git里面最讨厌的是什么呢？我上操作系统课的时候会讲这个例子，最讨厌是你现在有个工作区，对吧？你你现在有有个你现在有个repo然后你现在改了，比如说你有一个hello.c然后你现在把它改了改改改改改到一半，然后这个时候项目还不能编译，也不能运行，测试也通不过。你改到一半，突然导师给你打电话，我现在有一个很很高很高优先级的项目，你就有个bug，马上客户这个项目就要交不了差了，赶快把这个bug给我一分钟修了。好，那你怎么办？你不应该commit对吧？</p>
+<p><strong>[00:30:57]</strong> 是你需要你需要的是你你需要把它加到你的这个index里，然后git stash，然后它会压，然后这其实是一个比较讨厌的操作，因为你是一个东西对吧？是一个东西，然后slash一个东西。你去把原来那个bug开始修，你刚修了一半，你的导师又给你打电话，你这个bug别修了，我还有一个更优先级更高的bug，你去把它修了。好，你这要再把它是然后Git是一个站，然后它里面就会有好多好多个提交。然后你你你去你需要去管理那个那个stack。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_33.jpeg" data-desc-position="bottom"><img alt="画面 00:31:00" src="../assets/04/04_33.jpeg"></a></p>
+<p><strong>[00:31:33]</strong> 然后如果你想象想象如如果你想象在任何时候，也就是你随时随地都在编辑这个 jj，这不就是一个change吗？对吧？这就是一个change，你现在把hello.c改一改，加一行减一行，它都是change。所以你你所以这个jj它它好像是在干一件什么事呢？好像是你你但凡改了一个字节，它都会立即做一个Git commit。当然这个commit不会产生好多线性的历史，而是先把上一次的那个就上一次那commit给抹掉。然后他上一次的commit就你改了一个字节，那上一次的那个提交就被抹掉了。抹掉然后你重新用当前这个修改去替代这个提交。也就是说你永远是把因为现在有个change，这现在有个当前的snapshot，它永远是提处于一个提交的状态，一个change提交的状态，那你就很舒服了，你连这个staging area也不需要了，这就是一个非常好的，它几个你从你从我要把change作为first-class citizen开始，你再往后推，你就可以发明自己的版本管理系统。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_34.jpeg" data-desc-position="bottom"><img alt="画面 00:32:00" src="../assets/04/04_34.jpeg"></a></p>
+<p><strong>[00:32:52]</strong> 当然这个不是它的全部，然后它还有一些别的有别的路线可以推导出来。但是你们适当的时候可以质疑一下，比如说Git就Git有没有哪里做的不够好，对吧？Git哪里做的不够好，然后如果如果可以做的更好的话，还能做怎么样的设计？所以我觉得这是很有趣的一些非常有趣的设计。你们可以在agent的带领下，或者说我开了一个头对吧？我说我给你们一些motivation，你们可以把这些最重要的prompt交给agent，说我如果要学jj，然后我想我想我想从change开始理解对吧？然后如果你看他的tutorial 啊，它其实也是一上来就会告诉你，它没有staging area等等这样的。你你管你管理这个版本是更自然，它对人类首先对人类更友好，然后实际上他可能会对agent也稍微更友好一点友好一点对，友好一点。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_35.jpeg" data-desc-position="bottom"><img alt="画面 00:33:00" src="../assets/04/04_35.jpeg"></a></p>
+<p><strong>[00:33:49]</strong> 所以我觉得为什么你们作为AI native的人类能够淘汰掉我们这一代人，就是因为我已经形成了 Git 的肌肉记忆了，然后比我更老的一代人他已经形成SVN的肌肉记忆了。然后当一旦人形成一个肌肉记忆以后，要把这个习惯掰过来就很困难了，对吧？就比如说我现在对 Git 是有肌肉记忆的，但是我即便是能够理解这个jj的概念，甚至我可能理解的会比你们可能作为初学者还要更好一些。我还是可以从我的first principle去思考它，然后自己相当于 virtually re-implement这个系统。但是我即便能够理解，我也没有足够的时间再去训练另外一个肌肉记忆。所以你们是反过来的，你们跟我正好是反过来的。你们应该在你们现在还没有形成肌肉记忆的时候，就直接去用那个对的东西，就人类历史都是积累的，对吧？它它SVN实际用不下去了，才用git然后Git大家发现了Git的缺点以后有了，所以。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_36.jpeg" data-desc-position="bottom"><img alt="画面 00:34:00" src="../assets/04/04_36.jpeg"></a></p>
+<p><strong>[00:34:50]</strong> 你们可以的是先用肌肉记忆记住一个最正确的设计，然后再去理解这个设计是怎么样。就是你再回去想的时候，原来Git这么蠢，对吧？在Git出现的时候，你大家会想Git这么先进，它是一个persistent的data structure，就是SVN。就是SVN从一开始它走从纯 diff那条线就走错了，到Git的时候大家觉得很先进。然后到现在的时候，你再回去看的时候，原来Git也犯了一个对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_37.jpeg" data-desc-position="bottom"><img alt="画面 00:35:00" src="../assets/04/04_37.jpeg"></a></p>
+<p><strong>[00:35:18]</strong> 犯了一些设计上，他当然这是因为他最早的时候他没有没有想过rebase会有这么大的impact对吧？他有merge就已经很好了，就能解决他手上的问题了。所以他可能没有把这个概念模型想的想的更加的清楚。这是一些有意思的这个comments，也是你们学习可以告诉你们一些学习的建议。你们在学东西的时候，其实尤其在AI的辅助下，可以不断的往前走。</p>
+<p><strong>[00:35:51]</strong> 对，这是这个。对，好，但这门课不是软件工程，这门课是生成式软件工程。所以我们要真正要做的事儿是在agent时代再次重新设计版本管理系统。也就是说你当然可以让这个agent去用git然后让agent去用，那就就对人类来说就是一个很大的进步。但对agent来说可能进步来说相对会小一些，因为他好像很会rebase这些。那这个时候你看我们一路走过来，SVN 有局限，Git有局限。那在agent时代，我们的局限和我们要做的破掉的改进是什么？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_38.jpeg" data-desc-position="bottom"><img alt="画面 00:36:00" src="../assets/04/04_38.jpeg"></a></p>
+<p><strong>[00:36:38]</strong> 刚才所有的这个version control system它都有一个假设，这个假设就是这个version control system的使用者是人类人人类有什么特点呢？人类是这个single-threaded的生物。我一直上操作系统课的时候讲并发程序，然后并发程序。我打什么比方呢？你就把线程想象成是一个人，然后你的线程可以问共享内存。那访问共享内存的时候，两个基本的操作是load和store，或者说read和write，对吧？我可以从一个变量里读一个值，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_39.jpeg" data-desc-position="bottom"><img alt="画面 00:37:00" src="../assets/04/04_39.jpeg"></a></p>
+<p><strong>[00:37:08]</strong> 我把X读到我的临时变量里，或者我可以写X 等于1。然后这个操作是不能同时进行的，就是我不能说既读一个又写一个，你这样就需要一个原子指令了。然后绝大部分的这个shared memory access又想象成人是什么呢？我如果想要观察这个世界，那我对不起，我手要抱在后面，我只能看。然后等我看完了，比如说我看到这个同学在这儿，我想要对他施加一个效果。比如说我想用这个粉笔导弹射击它。</p>
+<p><strong>[00:37:36]</strong> 那当我想要真正要write就写一个变量的时候，我必须要把眼睛闭起来。而我把眼睛闭起来扔的时候，注意我读到的那个值其实已经失效了，对吧？那个值已经是旧的值，就是我上一个时刻读的那在上一个时刻到这个时刻之间，可能经历了很多的事情。可能我被换cpu换下去了对吧？我被中断打断了，然后换了另外一个线程上来执行，然后执行了可能执行了一秒钟以后我才恢复过来。但我恢复过来以后，我看到的我在计算器里面看到一个X值，是我上次读X 等于1。然后这个时候我就把那个粉笔扔出去了，那很有可能就扔的就是错的对吧？就是single-threaded。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_40.jpeg" data-desc-position="bottom"><img alt="画面 00:38:00" src="../assets/04/04_40.jpeg"></a></p>
+<p><strong>[00:38:14]</strong> 然后当多线程的时候带来这多线程的共享内存，就带来了无穷的问题。其实人类也是的，人类人和人之间是有无法逾越的物理屏障的对吧？你不能理解我的思想，我也不能理解你的思想。</p>
+<p><strong>[00:38:31]</strong> 我就是一个独立的个体，有分子对吧？把我很强的连在一起。Ok所以我们只有一份IO设备，我们就一双一一双手，一张嘴，一对眼睛。然后我们我们在比如说在编辑这个代码库的时候，以这种方式编辑代码库产生change，那就是以小时为单。</p>
+<p><strong>[00:38:52]</strong> 位的对吧？</p>
+<p><strong>[00:38:53]</strong> 小时为单位的。一个软件公司可能比如说负责一个模块的开发，可能多也就十几个人，十几个人已经是一个不小的团队了。十几个人每个人以小时为单位开发，那最多也就是以十分钟这样的对吧？十分钟这样的单位产生一个提交。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_41.jpeg" data-desc-position="bottom"><img alt="画面 00:39:00" src="../assets/04/04_41.jpeg"></a></p>
+<p><strong>[00:39:14]</strong> 那十分钟为单。</p>
+<p><strong>[00:39:16]</strong> 位产生一个提交，意味着这个速度会比人和人之间沟通的速度要慢很多，对吧？因为尤其是一个team，它工位都在一起，你们研究生的工位都在一起，你马上你再写，你要写一个东西叫一两个小时。你在写写之前你肯定跟师兄说一声，师兄我要干个这个行不行？对吧？20秒钟、30秒钟，师兄说行，你去改，我们现在不再改，对吧？或者你们如果去厂里面打工了，厂里面可能每天早上都要开会，对吧？每天早上的leader都会把任务分享出来，今天我们要干什么事情。然后你你做什么你做什么你做什么你就提前在什么半小时的时间里，你就划分了一个scope，你就把这个项目开了，你领了其中一部分走，然后你就去产生change。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_42.jpeg" data-desc-position="bottom"><img alt="画面 00:40:00" src="../assets/04/04_42.jpeg"></a></p>
+<p><strong>[00:40:04]</strong> 当然这是古法古法编程古法编程。在古法编程的时代你就看到，比如说是一个合理的对吧？是一个合理的设计。因为你不你你我刚才说的那个情况，你导师给你打电话，导师给你打电话这件事情是可能发生的。但是在你修到一半的时候，导师再给你打电话这件事情是不太可能发生的对吧？发生概率是很低的。绝大部分时候你的这个也就是stack 里面就一层，如果你有好多层，你完全其实挺麻烦的对，有一点麻烦你还你就需要去rebase。</p>
+<p><strong>[00:40:39]</strong> 所以你你会你会尽可能的保证这个不要太深，因为你可以拒绝一个工作，你会说我手上有一个更高优先级的工作，我现在对不起，我不能干这个事儿。然后等你干完了以后，你自己可以排一个排排一个队列，对吧？所以Git是给人用的。</p>
+<p><strong>[00:40:56]</strong> 但是在agent的时代，这件事情变了。如果是一个agent team，单个agent他首先生产这个AS lo的速度就远远快于人，对吧？它生成A就以分钟级为单位，甚至更快。它有时候你让它fix一个东西，它在上下文是热的时候可能就极。几十秒钟对吧？这DeepSeek V4 flash来干活的时候，就几秒钟就做了。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_43.jpeg" data-desc-position="bottom"><img alt="画面 00:41:00" src="../assets/04/04_43.jpeg"></a></p>
+<p><strong>[00:41:24]</strong> 那以秒级当agent工作的时候，以秒级可以产生一个原子提交，并且你可以轻易的得到一个十倍100倍的agent team的时候，jj 或者 git是这样的，它还是跟git兼容的这样的一个为人设计的模型。就有点跟不上？确实是有一点跟不上这个速度。</p>
+<p><strong>[00:41:45]</strong> 就算是可能大型的项目，它有一些门控，就是你你你当我写完了以后，改完这个部分以后，他必须要经历一个测试的流水线，这个测试可能本身就要运行几分钟。那那可以放缓agent提交的速度。但是毫无疑问的，agent加速了这个软件开发的过程。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_44.jpeg" data-desc-position="bottom"><img alt="画面 00:42:00" src="../assets/04/04_44.jpeg"></a></p>
+<p><strong>[00:42:04]</strong> 那如果agent加速了软件开发的过程，我们应该怎么样为agent设计这个版本管理的系统，首先我们可以让agent沿用人的模型，每个agent你就想象每个agent都有一个自己的开发计算机，对吧？Agent有个自己的开发计算机，你就把single-threaded的人类和agent就做一个严格一一对应的类比。你就让它有一个独立的电脑，可能是个容器，然后你就把它放到什么g点六点一点点C上，然后你就跟你就直接instruct agent说好我的这个remote仓库是在Git的。你现在就是一个单人开发者，然后你现在可以从里面收到命令，然后如果你收到命令你就可以开干。所以这件事情其实是其实非常容易实现的。比如说比如说fancy .</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_45.jpeg" data-desc-position="bottom"><img alt="画面 00:43:00" src="../assets/04/04_45.jpeg"></a></p>
+<p><strong>[00:43:01]</strong> project.</p>
+<p><strong>[00:43:03]</strong> 好好我可以这样。</p>
+<p><strong>[00:43:16]</strong> 这样也可以。好，我就直接让agent 正在开干。然后我现在就agent 时代有点什么好呢？每个人都是领导，你就是这个领导，然后现在有两个tmux session，你可以想象我实际在你们实际开发的时候，这两个tmux session都是位于两台不同的机器或者不同的容器。它物理上隔离开的，他看不到世界上面其其他的人。还故意用一个可能在中国现在还能用的词，对吧？然后我现在就是master好，你看这个名字改过来了对吧？Very好好。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_46.jpeg" data-desc-position="bottom"><img alt="画面 00:44:00" src="../assets/04/04_46.jpeg"></a></p>
+<p><strong>[00:44:14]</strong> 好，我可以给他。</p>
+<p><strong>[00:44:17]</strong> 每一个都起一个派。</p>
+<p><strong>[00:44:21]</strong> 好。</p>
+<p><strong>[00:44:26]</strong> Coding agent好，那我可以让他干什么呢？</p>
+<p><strong>[00:44:48]</strong> Okay, anyway, it .</p>
+<p><strong>[00:44:51]</strong> doesn't .</p>
+<p><strong>[00:44:52]</strong> matter. 你看他们两个就开始工作了，开始工作了。好好他们A。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_47.jpeg" data-desc-position="bottom"><img alt="画面 00:45:00" src="../assets/04/04_47.jpeg"></a></p>
+<p><strong>[00:45:14]</strong> 我让他，所以你看当AI agent变快的时候，好他他他开始写写对吧？当AI开始变快的时候，你想一想如果你的指挥发生一点点差错，或者哪怕甚至指挥就是就现在一个流行的paradigm，就是你有一个监工的agent，然后你有好多个这个子。有些比如说比如说为了最大化模型的智力，防止AI生成你不想要的东西，你会放两个比较强的模型，比如说由这个来设计，然后让Claude 来 review，然后让他们互相打架，然后达成一致，你只要开两个 tmux就行了。然后你的主就负责协调，就观看他们的输出和或者总结报告，然后往里面inject prompt，然后这个一个多agent就赚钱了。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_48.jpeg" data-desc-position="bottom"><img alt="画面 00:46:00" src="../assets/04/04_48.jpeg"></a></p>
+<p><strong>[00:46:20]</strong> 然后我看。</p>
+<p><strong>[00:46:22]</strong> 一下这个repo status。然后你就发现如果大家工作在同一个 Git 仓库上就会有一些麻烦。但如果他们工作在不同的 repo 上，就是完全可以的，他们可以合到对吧？他们可以和去去远端拉取别人的提交，然后冲突了，如果冲突了就会自己修复。然后在必要的时候，他甚至还可以给这个master agent发消息，你们立即就可以构建出一个这样多agent的系统。</p>
+<p><strong>[00:46:59]</strong> 相应的我们今天也有一些workaround，比如说Git具有worktree这样的功能。所以你看我可以问他，我的老师说git worktree可以改进这样并行的工作方式。那么能为让这两个tmux sessions都工作在worktree吗？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_49.jpeg" data-desc-position="bottom"><img alt="画面 00:47:00" src="../assets/04/04_49.jpeg"></a></p>
+<p><strong>[00:47:27]</strong> 提问其实是关键的。</p>
+<p><strong>[00:47:28]</strong> 你们可以在各种信息，就你们甚至比如说你今天早上走到教室的时候，再看微信公众号，然后这个微信公众号上面说Git，或者他提了一个什么样的sandbox container，你就可以立即让agent来帮你试一试。然后我来看一看他他在做什么。这不是一个相对来说比较容易的任务吗？Ok他确实是在写写脚本，你看他把pad退出来了，应该ok了。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_50.jpeg" data-desc-position="bottom"><img alt="画面 00:48:00" src="../assets/04/04_50.jpeg"></a></p>
+<p><strong>[00:48:20]</strong> Right? 这是当前的git worktree，我们的 Git 允许，我们创建一个工作树。然后这个工作树就是一个你可以想象成就是连接到了一个remote，就是一个git repo，然后我可以在这里面做独立的提交，在一个隔离的环境里面做独立的提交。然后大家都知道.git 是什么，.git 的是一个目录，对吧？.git 的比如说我现在我的JSE Oh。大家都知道我的.git 的是一个目录，然后它有里面有一些比如说这个logs还有objects？三种类型的对象。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_51.jpeg" data-desc-position="bottom"><img alt="画面 00:49:00" src="../assets/04/04_51.jpeg"></a></p>
+<p><strong>[00:49:14]</strong> 那work里面的.git是什么呢？打开就是一个普通的文件，是一个文本文件。然后你你如果如果你继续追问agent的话，agent会告诉你这个也是我我我才知道的。就是呃除了git除了.git除了是可以是一个目录以外，它还可以是一个这样的只有这个格式的文件，然后这个文件说gitdir然后好，你看它指向了一个tree，然后这个是什么呢？这就是文件系统里面的一个文件。所以你看到Git最大程度上。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_52.jpeg" data-desc-position="bottom"><img alt="画面 00:50:00" src="../assets/04/04_52.jpeg"></a></p>
+<p><strong>[00:50:02]</strong> Git 最大程度上复用了操作系统里面的机制。这个tree就是一个这样的，它是一个小型的Git目录？它是一个小型的 .git，给它依然有着head index locks这些一个微型的Git的目录，但是它还是依附于原有的那个 Git 目录而而生的这样一个特性，这个特性就在AI时代突然间变得好像有点有用。我们可以在在提交直接在本地互相可见，不需要互相的push和push。如果你像刚才我说的，我开好几台虚拟机，然后在每台虚拟机里面放一个agent，然后我直接往那个tmux 里面注入，那当然是可以的对吧？这是完全可以完成的。但是worktree 提供了一个更轻量的合作的方式。但是如果有比如说有冲突的修改，它仍然需要merge和rebase才能才能合才能合并，这样性能性能会更高一点。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_53.jpeg" data-desc-position="bottom"><img alt="画面 00:51:00" src="../assets/04/04_53.jpeg"></a></p>
+<p><strong>[00:51:06]</strong> 好，那我们回到这个agent team。如果我们有agent team或者一个agent swarm 除了，今天的workaround，比如说worktree这样的机制以外，还要回头来想为什么我们需要版本控制？为什么需要版本管理？也就是说我们人类的限制，就是人类对这个呃我刚才说十分钟对吧？一个小的team哪怕是一个团队都要十分钟产生一个commit。</p>
+<p><strong>[00:51:34]</strong> 所以是因为人的限制，塑造了这个工具人之间的这个communication gap。导致了你每天早上都要开一次会议，同步一下各个人的进展，然后再把这个任务给分下去。而且就算是人做了这样的沟通，你也都知道。你有的时候你想就你你的你的室友向你请教一个数学问题，明明你会做，你就怎么都没有办法给他讲明白，对吧？你除非你是一个很好的老师，能够共情别人，就是共情别人在哪里会能站在别人的角度去去思考，沟通的成本就是很高的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_54.jpeg" data-desc-position="bottom"><img alt="画面 00:52:00" src="../assets/04/04_54.jpeg"></a></p>
+<p><strong>[00:52:13]</strong> 所以也是大厂和小厂，尤其是初创公司，初创团队，为什么效率可以更高？就是当软件系统大了以后，人多了以后，他沟通的效率变低了以后，它产出的速度也就降下来了。所以可能你一个100个人的团队，他不可能达到一个十人团队效率的十倍，可能有两倍、三倍就已经挺不错了。所以团队没有办法变大，所以我们需要Git的各种各样的best practice快照对吧？快照然后小步的前进，你改一个type也要做一个commit，然后你做一个什么也要一个commit然后都可以。然后这些小的commit每个都可以追溯，因为一旦出问题了以后，你需要回溯到那个人做commit个时间，然后那个人是有记忆的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_55.jpeg" data-desc-position="bottom"><img alt="画面 00:53:00" src="../assets/04/04_55.jpeg"></a></p>
+<p><strong>[00:53:02]</strong> 开发者会回想起，那天我们当天早上开了一个会，然后我收到要做这个需求。然后，做这个需求的时候沟通发生了一个问题，他找到那个时候的沟通记录文档，然后再说我们这个地方应该怎么修正。所以你看有的git bisect的git blame这些专门为人来设计的特性。但是你想一想，如果是由agent team或者agent swarm来实现你的项目，我们还需要git blame吗？对吧？就是因为人可以不就是你这个事情我不你多了，你就该被开掉了是吧？实习生你就背锅了。</p>
+<p><strong>[00:53:41]</strong> 但如果agent没有坐牢的被坐牢的被开除的能力的时候，这个模型就变了。我们再也不需要blame了，我们的项目只要前进就可以了，对吧？然后我们前进有的时候也不需要知道到底是哪一个提交引入这个错误。我只要知道这个地方错了，我也不要再也不要管它历史上是怎么造成这个错误的，我只要把这个错误修了就行了。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_56.jpeg" data-desc-position="bottom"><img alt="画面 00:54:00" src="../assets/04/04_56.jpeg"></a></p>
+<p><strong>[00:54:06]</strong> 因为agent之间的communication，而且尤其现在更好玩的是，我们的每个agent是相同的模型，也就是说他们是完全相同的克隆体。同一个事情让他们来做，他们大概率会收敛的。虽然模型还是有不确定性，还是会收敛到相同的结果，对吧？同样的prompt的做同一件事可能有点细微的差别，但是最终的那个方向性的东西可能收敛到相同的结果，所以我们再也不要blame了。那我们的Git永远就是一个，或者我们的项目就永远就是一个向前进的过程。</p>
+<p><strong>[00:54:39]</strong> 每次我现在在就快照肯定还是需要的。因为比如说这个方向走错了，我们你如果没有保留历史的上的某一个snapshot，那一下子往前走了好多以后再回去，可能它的代价比你一点一点在再往前修要好。所以保留快照肯定还是需要的那我们就是不断的大步向前。</p>
+<p><strong>[00:55:00]</strong> 也永远几乎永远不要看过去Git的这个community里面只是留了一些lessons，或者我们大部我们这个项目到底经历了什么样的演化，然后不停的就往前走，合并合并合并合并。所以就说历史的价值可以从谁写错了变成我怎么把它修好。只要保存，我只要能知道我从现在开始怎么样能够往前进这件事情就可以了。所以你再再想再想这个时候你在计算机学科学到的那些知识又又起作用了。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_57.jpeg" data-desc-position="bottom"><img alt="画面 00:55:00" src="../assets/04/04_57.jpeg"></a></p>
+<p><strong>[00:55:34]</strong> 我又回到讲操作系统的时候讲并发。数据库就是就现在的这个Git的模型，更像是数据库里面的并发控制。也就比如说我们有两条cy口对吧？然后这个see它都是一个transaction，它是一个很大的都是个很大的transaction，可中间可以混任何代码。然后你可以先比如说你先一个select，select一个什么，你先读一下，那我这里也可以select，那我先读完以后，我可以做代码的计算。比如说我就是Python代码或JavaScript代码。然后这个代码是图灵完备的，你永远不知道它会根据我看到结果算出什么。我甚至也可以从外面，比如说说根据我当前的时间在算一个什么东西，然后算完以后我再update。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_58.jpeg" data-desc-position="bottom"><img alt="画面 00:56:00" src="../assets/04/04_58.jpeg"></a></p>
+<p><strong>[00:56:27]</strong> Update, 然后update的时候就会产生冲突，也就是说这个就可能产生词组也可能产生冲突。就是说这个update可能可能如果这个update bit读它，这个bit要读它，那就会产生一个循环依赖，有可能是产生这种数据的依赖，也可能是产生就是我我我要锁你我要锁你的对象，你要锁我对象产生死锁。然后这个时候就会导致这个transaction B可能比如说这个transaction B就不能进行下去了。对不起，因为我检测到一个循环的依赖，所以对不起，我我我这个就不能做了，我要回滚。相当于它要rollback rollback，然后其实Git的模型有一点像这种乐观的并发控制。Optimistic为什么它是乐观的呢？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_59.jpeg" data-desc-position="bottom"><img alt="画面 00:57:00" src="../assets/04/04_59.jpeg"></a></p>
+<p><strong>[00:57:14]</strong> 他就说我假设这两个transaction不会冲突，对吧？我在执行的时候我会假设transaction不会冲突。这个假设在数据库系统当中是大概率成立的，为什么呢？我们想想教务系统，你们每一个同学他读的都是你读写都是你自己那块数据，对吧？你就说我选课选的是我的课，我查看课表查看的是我的课表。所以说一个全局的冲突是不太可能有的。我两个同学哪怕同时开始选课，我也是读我的写我的，这两个就可以就过去了。</p>
+<p><strong>[00:57:52]</strong> 这个的 analogy也是这样，就是说我假设我这样开发，我们已经事先开过会了，今天早上开过会了。所以我可以顺着这条路先做这个，另一个人做这个，然后合并的时候大概率不会产生冲突。不管是merge也好还是rebase也好，这个都能顺利的顺利的完成。但是这。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_60.jpeg" data-desc-position="bottom"><img alt="画面 00:58:00" src="../assets/04/04_60.jpeg"></a></p>
+<p><strong>[00:58:14]</strong> 这就这是。</p>
+<p><strong>[00:58:15]</strong> 这是就古法编程时代的，就像我们see来做一个比方，但是如果我们agent的快了1000倍，对吧？Agent的快了1000倍。如果我们的这个主agent又没有协调的时候，就一下子又分了好多任务出去，他们就真的有可能会更频繁的触发这个？transaction abort，然后触发这种abort。</p>
+<p><strong>[00:58:44]</strong> AI时代也不是什么大问题，就是agent反正出错了或者出了conflict它就修，它能修好。但是是不是在agent的时代，我们可以换一种并发控制的方式。你想想我们在操作系统里面，这是在数据库里面做的，我们在操作系统里面学的并发控制，你们是用什么做并发控制？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_61.jpeg" data-desc-position="bottom"><img alt="画面 00:59:00" src="../assets/04/04_61.jpeg"></a></p>
+<p><strong>[00:59:04]</strong> 上锁锁和这个数据库里面的这个transaction是有点不一样的。你是lock一个对吧？我上课时经常说一把大锁保平安，对吧？做实验你们就知道，做过实验你们就知道了当我想要访问资源可能冲突的资源的时候，我会先把它锁住，说我先想快一把锁。然后这把锁一旦快的时候，别人想要再再lock的时候，那对不起这个上锁的就必须要等到快以后，对吧？一个release快的关系建立起来就必须是先一后二，而不是这种optimistic的。大家先往前跑跑了再说。我必须是我先要知道我必须在使用这个资源之前。</p>
+<p><strong>[00:59:55]</strong> 我要declare.</p>
+<p><strong>[00:59:57]</strong> 对这个资源的使用用上锁的方式。所以看这是就是只有你你在这个操作系统课、数据课、数据库课，你真的把这些东西学会了。你回来想的时候，软件工程里面这些概念又在再再做一次。所以想想现在如果agent的动作非常快，我们其实应该用更加偏向这种悲观的并发控制。也就是说我我我今天要做什么事儿，或者我有一个主agent我规划，然后规划完了以后，我就立马把这个项目的某一个部分给锁上，我可以把这个Git，就就说我应该在一个git repo或者一个快照上，我支持一个锁的操作。把这些scope说我现在锁住了，我要我要我现在做一件事需要这些，他先上锁，然后上锁以后做完以后commit，然后另外一边也可以上锁。但是如果一旦他想要干的事情被另外一个人锁上了，他就必须等到这个锁前面人释放了，他才能才才能才能再再上锁，这样不就几乎避免了所有的冲突，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_62.jpeg" data-desc-position="bottom"><img alt="画面 01:00:00" src="../assets/04/04_62.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_63.jpeg" data-desc-position="bottom"><img alt="画面 01:01:00" src="../assets/04/04_63.jpeg"></a></p>
+<p><strong>[01:01:05]</strong> 在稳就比如说打比方，我可以在文件级上锁，我就避免了两个agent它会同时写同一个测试，往同一个比如说测试或者一个配置里面做做更改。但是又因为agent数量足够多，这个速度足够快，我还是可以保证整体项目的进度可以往前推。因为也许还有别的agent可以继续运行，这也就跟操作系统里面我们去实现并发程序。我经常说说如果你一把大锁保平安了对吧？</p>
+<p><strong>[01:01:35]</strong> 或者你哪怕是锁锁拆小了，我们互斥锁，它的本质是不要并行，不要并发。它和这个多处理器并行是有根本矛盾的。它不就要把一个并行能并发的程序退回一个串行程序。但是当这个系统里面有好多独立的不冲突的线程在运行的时候，我即便每一个线程都持有的一把锁，他还是可以继续高效的。即便是悲观的，它依然可以是可以是高效的？就是这些知识关系关联起来让你看清楚可能？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_64.jpeg" data-desc-position="bottom"><img alt="画面 01:02:00" src="../assets/04/04_64.jpeg"></a></p>
+<p><strong>[01:02:08]</strong> 我觉得在agent的时代，我们又可以重新设计一个版本控制的系统。所以我觉得这就在 agent 时代，软件工程肯定是要发生很大的变化的。你从这出发？我们要管理快照，我们要管理版本，我们要管理change，我们还要管理飞快的change？那答案是什么？可能Git可能是一条线。如果我们用 jj这样的方式来管理软件，那可能又是另外另外一条线，对吧？</p>
+<p><strong>[01:02:36]</strong> 所以你发现这个学操作系统，学数据库这些东西有用，你还是虽然痛苦对吧？你怀疑在AI时代我学这种东西，AI都会写了数据库对吧？这个是SQL 查询，我早就不写任何SQL 查询了。那我们还有没有可能学数据库是有用的？答案是有用的，你还是去去好好学习对吧？数据库里面有这种lock这样的机制。也是为什么我喜欢上课的原因。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_65.jpeg" data-desc-position="bottom"><img alt="画面 01:03:00" src="../assets/04/04_65.jpeg"></a></p>
+<p><strong>[01:03:05]</strong> 就是我我我我如果我不来上操作系统课，我不上这个生成式软件工程课，可能就不会让我去，对吧？我在备课的时候会把这些事情在脑袋里面再过一遍，是不是地球上。所有人都都错了。因为我讲给你们的时候，我必须要共情。我的听众要考虑到你们是一个只能接受这个比较平实朴实逻辑的听众，不能直接就说这个什么操作系统是怎么设计的等等等。我必须要把那个那个最顶层的idea提炼出来，然后试图让大家共情。当然这可能我做的也不够好，你们可以在AI的帮助下再再来再来重新理解一下。</p>
+<p><strong>[01:03:48]</strong> Ok好，版本控制，版本管理基本上其实我就我就我就讲完了对吧？从历史动机到过去讲到现在，这就次再讲到未来可能发生的事情。但是版本控制本质上还是一个工具，不管是不是，哪怕是我刚才那种，比如说基于某一种乐观或者悲观锁的版本控制，真正困难的实际上是在进度，也就是团队的管理。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_66.jpeg" data-desc-position="bottom"><img alt="画面 01:04:00" src="../assets/04/04_66.jpeg"></a></p>
+<p><strong>[01:04:19]</strong> 我们为什么现在觉得还需要软件工程？就是因为我们现在没有办法做到一句话就直出一个高质量的产品。如果斩杀线到了这个就老板有一个想法就说？就说我要做一个agent用的微信，我随口说一个或者说做一个AI时代的微信，然后这个微信是一个社交爆款，然后以后这些人社交可能也就不要用微信了，就用我。</p>
+<p><strong>[01:04:49]</strong> 当然你可能有一个更具体的想法，比如说为什么你有一些思考，然后如果这时候AI直接就能出个微信级的产品，那软件工程就已经死了对吧？那我们就就呃就就就就都死了。但是现在这个斩杀线暂时还没有到，所以至少没有到这个团队管理这层面，所以我们可能还还要学。但是我觉得可能也许有一天真的我也要被炸掉。因为摩尔定律本质上也是种skin，它现在还是成立的模型，肯定是更强、更小、更快。然后也许算力就有一天能够换出我们的我我们的智能，但今天至少AI还不知道怎么做团队的管理。因为每当你多一个人的时候，这个沟通的关系都是平方级的上升的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_67.jpeg" data-desc-position="bottom"><img alt="画面 01:05:00" src="../assets/04/04_67.jpeg"></a></p>
+<p><strong>[01:05:48]</strong> 因此现在软件工程团队里面最难招的其实不是码农，是那个能把任务分解的那个team leader，对吧？也就最难招的是那种能把那种国民级的应用的那种对吧？就说我要我要去造一个微信，然后那个微信它还能够分出？我就一个100人的团队，能分出十个小团队，然后十个team leader干，最后加起来我拼起来还能成为一个团队，这个人人最稀缺。然后接下来那个能够带领小团队的人其实也很稀缺，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_68.jpeg" data-desc-position="bottom"><img alt="画面 01:06:00" src="../assets/04/04_68.jpeg"></a></p>
+<p><strong>[01:06:22]</strong> 这个人月神话里面，那里面就是人人人之间两两之间就是平方级的沟通关系。然后就算是你能把你份内的事情做好，就是因为这个平方级的沟通关系，别人也在做他的事儿。你不百分之百知道别人在做什么事儿的时候，或者你对这个整体的团队了解不是很好的时候，你你你还是就这样，最后就会各种冲突。然后你写测试我过不了，就经常会发生发生这样的事情。</p>
+<p><strong>[01:07:00]</strong> 如果我们想要管一个团队的话，或者说你们在今天在想要在毕业的时候能够具有一定的团队管理能力，你现在就可以当成是那个主agent了，对吧？就像我刚才那样，刚刚才当然刚才我给了一个不好的示范，对吧？我说我今天创建两个slave，你你现在你现在你现在可以立即拥有这个DeepSeek V的这个slave。然后然后你可以去想，如果你要尽可能最大化两个或者三个或者更多agent，你应该怎么把这个任务给分解，然后你应该怎么样确定一个提交的策略，什么时候你的agent应该提交，什么时候它应该合并，对吧？然后你就可以把刚才我们讲的所有的版本控制的概念带到你的开发流程里。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_69.jpeg" data-desc-position="bottom"><img alt="画面 01:07:00" src="../assets/04/04_69.jpeg"></a></p>
+<p><strong>[01:07:51]</strong> 所以重要是这句话，版本控制是工具，它是由蒸馏了人类过去软件工程很多年的经验得到的。说我们要人类要这样开发，然后在这个工具上你可以开发出属于你自己的软件工程的直觉和经验来做。然后这里面就有好多比如说学东西还是有用的一些意外。除了比如说我可能后面再讲怎么怎么来做这个软件管理。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_70.jpeg" data-desc-position="bottom"><img alt="画面 01:08:00" src="../assets/04/04_70.jpeg"></a></p>
+<p><strong>[01:08:24]</strong> 最近我看到一个蛮有意思的题目，大概说是这样的这样的我又带了这个模型对汉诺塔有很喜欢的汉诺塔作为一个面试题。这好像是应该是因为我不知道为什么就在网上刷到的是小一般是小学生考级的题目。还有塔都会低V的会还会。现在有个额外的要求，就是你的所有的盘子的移动只能往一个方向。就比如说我现在两简单一点，两两个盘子，两个盘子我现在移过来，这个方向移是可以的，是可以的。这个方向移是可以的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_71.jpeg" data-desc-position="bottom"><img alt="画面 01:09:00" src="../assets/04/04_71.jpeg"></a></p>
+<p><strong>[01:09:10]</strong> 这个方向。</p>
+<p><strong>[01:09:11]</strong> 移也是可以的，这个方向移也是可以，就是我要往只能往一个方向移动，当然折过来就折回去，我不允许的是就是你三个盘子的时候，你就能看出好三个盘子的时候就可以看出问题了。如果我要移三个盘子的话，我希望的是先把两个移到中间，对吧？假设两个已经移到中间了，那这时候我下一个就是从把这个盘子从这里移到这里就对了，对吧？这是汉诺塔的正常的移法，但是在这个限制下你是做不到的，在这个限制下你不能把它移到这儿，你只能往一个方向，比如说往那个方向往向移动。好，你很难想象小学生要做这样的题，对吧？然后他要输出这个，就是你想想如果现在是你们觉得保研的这个机试或者是保研其实就是小学生难度。你就碰到这个题了，你要输出方案或者输出这个数字，反正也不是很大，但是你确实需要一个需要一个方需要理解这个问题，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_72.jpeg" data-desc-position="bottom"><img alt="画面 01:10:00" src="../assets/04/04_72.jpeg"></a></p>
+<p><strong>[01:10:28]</strong> 那那当然。</p>
+<p><strong>[01:10:29]</strong> 我讲的不是这个汉诺塔的故事，我讲的不是这个汉诺塔故事。这个汉诺塔的故事是你递归的时候，你现在要把它移过来，对吧？你为了移过来，你只能你还是先还是一样的。你先要把它移到这个，你需要的是先把它移到这里，然后让这个最大的盘子向右移一个，然后再把它移到这里，让向右的盘子移到这，再把它移到这里。所以就相当于是你考虑这个考虑最大的盘子，那个最优解它考虑最大盘子总是向右移一个，再向右右移一个的。好，当然我这个拆开来讲是因为我能这个吗？在这儿我准备了一个小例子。嗯，嗯。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_73.jpeg" data-desc-position="bottom"><img alt="画面 01:11:00" src="../assets/04/04_73.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_74.jpeg" data-desc-position="bottom"><img alt="画面 01:11:28" src="../assets/04/04_74.jpeg"></a></p>
+<p><strong>[01:11:38]</strong> 我准备这个例子，我写了一个这样的程序。好，没问题。他就是我刚才说的那个，就是我我我我得把如果我的下一个目标不是目标的话，我只有最大盘子，我总是向右移一个，再向右移一个，所以它是才是最优的，就是我我最大的盘子的那个移动是最少的这就是这是不可避免的。然后剩下的就基于inductive就归纳法，我这个也是最优的，有点难对吧？你很难想象小学生竟然可以做这样的题，但这不重要，重要的是我们现在要推出这个产品，比如说我现在要把这个东西卖给小学生，那我怎我我怎么样才能最好的把这个产品卖给小学生呢？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_75.jpeg" data-desc-position="bottom"><img alt="画面 01:12:00" src="../assets/04/04_75.jpeg"></a></p>
+<p><strong>[01:12:28]</strong> 当然是提供付费的增值服务。比如说这个小学生在他可以在这里写代码，对吧？我我我这个代码是可以随时编辑的。比如说我可以再写一个，他就错了对吧？我我我的可视化是随随代码来来运动的。比如说说错了他就我就可以找到。比如说对，找到我这条语句，试图把一个蓝色的一个小的移到移到大的上，然后同学们就能找到bug。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_76.jpeg" data-desc-position="bottom"><img alt="画面 01:13:00" src="../assets/04/04_76.jpeg"></a></p>
+<p><strong>[01:13:02]</strong> 如果我要挣钱的话，我要提供增值服务。就现在还只是一个一个纯粹的你可以这个playground，然后你可以可以写代码，然后可以运行它。然后到这个时候我就要提供一个AI助教，比如说这个小朋友，当然这个是不是不太好，开玩笑的，我们还是尽可能以一个便宜的成本提供给小朋友们。当你实在做不下去的时候，你就可以点一个叫我要助教。然后这个时候DeepSeek的token就开始燃烧，后这样我可以收取比你比这个DeepSeek 原价更贵的费用，对吧？然后然后记在你的账户上，后因为我的prompt是我独门的？我作为一个有经验的老教师，我可以把我自己蒸馏成prompt。然后我可以敏锐的知道这个小朋友的问题在哪里，然后给他提供一个个性化的指导。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_77.jpeg" data-desc-position="bottom"><img alt="画面 01:14:00" src="../assets/04/04_77.jpeg"></a></p>
+<p><strong>[01:14:05]</strong> 好，我觉得这个时候我就涉及到要做一个信息系统了，要做一个信息系统。那做这个信息系统，因为我我我有我我让学生来做这个事儿，我自己没有时间。我竟然有这么大的这个市场的钱，我竟然都不想挣这个，然后学生在设计，然后我看了那个学生和AI聊完的一版设计，然后我也让那个GPT 起来就是大概梳理了一下下需求。好，这个是GPT 的原话。</p>
+<p><strong>[01:14:34]</strong> 他说叫一个 API 应用，一个关系数据库，一个对象存储，然后需要异步点评时再加后台任务进程数据库关系和记录，大课程包与完整轨迹存放对象存储，任务量小时数据库任务表就够用，就是一个非常正常的。如果如果是你们上软件工程课，那那太正常。你看GPT它是一个语言模型，但。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_78.jpeg" data-desc-position="bottom"><img alt="画面 01:15:00" src="../assets/04/04_78.jpeg"></a></p>
+<p><strong>[01:15:01]</strong> 我不。</p>
+<p><strong>[01:15:02]</strong> 喜欢这个设计，为什么呢？因为我不知道你们有没有用过Overleaf就跟别人协作过文档。然后Overleaf是有一个功能的，它可以把它当成是一个git repo 导出。然后你可以直接这个时候我最喜欢这功能是因为我要给学生改论文。然后给学生改论文我就可以直接agent启动，我可以把那个那个论文克隆到本地，我就不需要忍受那个网页界面了，然后我就可以打开我的codex对吧？然后让codex去去帮我直接起给每一个.tex 文件都去修复里面的这个语法错误。我可以给一个我很长的prompt，让他让遵循质量就改好了。</p>
+<p><strong>[01:15:46]</strong> 我说学生好好结束了这个改已经改改好了。然后我们说这个playground，我我我可以，我难道不是应该我在我的学生每改改一次对吧？比如说ok我不知道这样行不行，可以，这个我难道不是学生每改一次，比如说我现在idle了，或者我点运行了，或者我切换了，我就自动做一个 Git 提交。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_79.jpeg" data-desc-position="bottom"><img alt="画面 01:16:00" src="../assets/04/04_79.jpeg"></a></p>
+<p><strong>[01:16:18]</strong> 然后我就可以把AI的点评，比如说当我申请AI助教的时候，他转圈圈，我就可以在这个Git提交上面产生一个分叉，这是一个comment gt没有算的是我产生一个这个东西的成本远远大于把把剩下东西pull 下来的成本，就这个成本是忽略不计的。而当我用这个数据库的时候，我确实得到了一些好处。比如说总体压缩的可能更小了，性能更高了。</p>
+<p><strong>[01:16:53]</strong> 但是这其实不是我我要的。因为我的本质，我的需求是版本管理。所以我甚至就在最早期的时候甚至最早期的时候，我可以把我的代码库和这个东西连在一起连连在一起了来管，就把它放在我的代码库里。然后直到我就是我我我的代码库，对，就就我的我的小朋友的代码就直接存在我的代码库里，然后我可以把探索性的在这上面创建Git的历史记录。然后直到我认为整个的比如说文件目录的格式，commit message的格式，然后我怎么样使用这些文件都都收敛了，然后我再把它迁移到数据库，这都是这都是可以的。我觉得这个还是挺好玩的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_80.jpeg" data-desc-position="bottom"><img alt="画面 01:17:00" src="../assets/04/04_80.jpeg"></a></p>
+<p><strong>[01:17:43]</strong> 你们学任何东西都是有用的，你学Git对吧？是有用的。你学这个model agent的管理，你会你就能够有一个机会去想到一个和别人不一样的不太一样的设计。我的好。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_81.jpeg" data-desc-position="bottom"><img alt="画面 01:18:00" src="../assets/04/04_81.jpeg"></a></p>
+<p><strong>[01:18:03]</strong> 在这里。</p>
+<p><strong>[01:18:05]</strong> 还有一个好，那么接下来就是我们真的可以干一件干一件事儿了。项目的早期阶段，你肯定不能用这个multi agent项目的早期阶段，你你就是包工头，你先找一个应该找一个相对来说能力比较强，你能够用到的最强的agent，然后你可以跟他多轮的对话。所以我我我要告诉大家，你们现在开始干就比什么都要好。我决定现在就开始直接sorry，直接打开课程。</p>
+<p><strong>[01:18:57]</strong> 作业。好。</p>
+<p><strong>[01:19:00]</strong> 我不知道发会发生什么，完全没有事先准备过。我还是要不开开两个好，我们有两种办法。第一种是直接然后直接回车对吧？这个其实我觉得对每个同学来说，你们都可以体验一下。当然我今天来替大家替代体验，我觉得更好的方式是Oh。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_82.jpeg" data-desc-position="bottom"><img alt="画面 01:19:00" src="../assets/04/04_82.jpeg"></a></p>
+<p><strong>[01:19:47]</strong> 这是什么？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_83.jpeg" data-desc-position="bottom"><img alt="画面 01:20:00" src="../assets/04/04_83.jpeg"></a></p>
+<p><strong>[01:20:01]</strong> Hop.</p>
+<p><strong>[01:20:11]</strong> 我们来观察一下他他会他会做什么，有时候AI的直觉和人的直觉就有点不太一样。像如果你现在一线模型，它会进入一个plan mode，它会跟你再确认可能会再确认一些事实，然后他再去生成一个workflow。后如果你们看过比较，其实挺好玩的。比如像Claude Code，它当它需要执行一个比较复杂的任务的时候，它会生成一段JavaScript，一段script，然后这个script 里面有一个函数叫agent。然后这个agent它里面是一个自然语言。然他用这种方式来组织，它甚至可以有循环。就是说我有好多任务，然后他可以在循环上面来解决这个workflow o然后你看到他这就直接开干了吗？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_84.jpeg" data-desc-position="bottom"><img alt="画面 01:21:00" src="../assets/04/04_84.jpeg"></a></p>
+<p><strong>[01:21:18]</strong> 用魔法就我对吧？只能用魔法打败魔法，这个300 token/s实在是太恐怖了。</p>
+<p><strong>[01:21:31]</strong> 好，ok不管先让他搞一会儿我。然后你发现这就是我前面上面前前面说这个上下文工程或者提示词工程里面最危险的一点。你提示词里面的每一句每一个词self attention都会看到它。然后看到它的时候，因为AI现在已经被训练成了prompt的舔狗，所以它有一种无可就是没有办法往外拉的倾向，需要遵循你的指令。所以当你把这个需求，尤其是这可能是一个讨论稿的需求，对吧？像我这是一个比较开放的需求。丢给他的时候，他会过度遵循这个指令，最终导致它会生成一个确实满足了指令。但是其实不是你想要的，就是你你回头看那个实验的要求，这个实验要求其实是言外之意，其实是这一句话叫实现一个持续为你工作的个人助手，这句话最重要，其他的话相对来说就没有那么重要，这些只是一些解读对吧？你作为一个好的为你工作的个人助手，你觉得12345是比较重要的那你们觉得当这每个人都有自己的观点，对你们来说，如果你想实现一个你的个人助手什么最重？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_85.jpeg" data-desc-position="bottom"><img alt="画面 01:22:00" src="../assets/04/04_85.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_86.jpeg" data-desc-position="bottom"><img alt="画面 01:22:26" src="../assets/04/04_86.jpeg"></a></p>
+<p><strong>[01:23:00]</strong> 就你你你实现。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_87.jpeg" data-desc-position="bottom"><img alt="画面 01:23:00" src="../assets/04/04_87.jpeg"></a></p>
+<p><strong>[01:23:01]</strong> 的第一个feature是什么？你想实现什么？最大的就是你在可能一个月以内遇到的最大的痛点问题，学习对吧？高效的学习和复习。因为你们要卷成绩，所以这毫无疑问是最重要的一个学习方案。</p>
+<p><strong>[01:23:23]</strong> 你可以最好是这个agent能够自动从外网上面收集数据，然后把它以一个层次化的方式归档，然后最终并且给我一个比较好的界面，这是你最想要的。然后你看我估计他十有八九没有，对吧？我来看一下。我问他，其实我想要的是一个比较好的学习。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_88.jpeg" data-desc-position="bottom"><img alt="画面 01:23:38" src="../assets/04/04_88.jpeg"></a></p>
+<p><strong>[01:23:55]</strong> 助手。</p>
+<p><strong>[01:23:56]</strong> 能收集外部信息，除租车及外部信息。然后综合总结，根据我的进度学习，看哪部分能实现我这个功能。对吧读一读一读，然后他在做database，你看他在做database。可以这样说，就是在没有你精心设想过讨论过的这个时候，AI基本上就只会生成 slop，就只会生成，你看它。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_89.jpeg" data-desc-position="bottom"><img alt="画面 01:24:00" src="../assets/04/04_89.jpeg"></a></p>
+<p><strong>[01:24:48]</strong> I smell reply没有吧？也就是说其实你要的就你脑袋里所想的那个东西。这就是我说的你的intent，你的specification，你的intent 是有巨大gap的。然后但是当你一旦这个模型看到说你要实现这个的时候，他就真的是真的去实现它了。然后我觉得肯定是做了一些不好的设计。比如说虽然当我提一号的时候，我真正需要的是一个browser use agent，它能帮我在各种网页上面处理L一号只是一个作为测试的出口对吧？它能把我的个人信息到一号上面。所以我可能第一步实现的就不需要去在你的教务系统上面做太多的设计，你做的过度设计反而反而不好。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_90.jpeg" data-desc-position="bottom"><img alt="画面 01:25:00" src="../assets/04/04_90.jpeg"></a></p>
+<p><strong>[01:25:42]</strong> 然后这个就是和刚才我看给大家给个大家看的那个例子是非常相关的。你看起来他做的所有的事情都是对的，对吧？从README.md来看，他做的所有的事情都是正确的，没有一个错误。但最终他得到了一个你不想要的要的东西。所以我看现在有没有Git提交了。他甚至都没有创建一个Git repository对吧？这就是你看你不跟他讲，当然我觉得可能如果是codex的话，他可能还是会初始化一个目录，或者是他会问你这个项目应该怎么管理。如果比如说我是一个成熟的产品经理的话，老板跟我说这个以后我肯定会跟我的团队去沟通一下项目怎么管。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_91.jpeg" data-desc-position="bottom"><img alt="画面 01:26:00" src="../assets/04/04_91.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_92.jpeg" data-desc-position="bottom"><img alt="画面 01:26:08" src="../assets/04/04_92.jpeg"></a></p>
+<p><strong>[01:26:34]</strong> 就在甚至在我写下第一行代码之前，我都要讨论好协作怎么做，项目怎么管，每天什么时候开会。啊这，很好玩，他就直接上手就上手就做，他觉得ok这就是一个用一次就丢掉的一个一个东西。感觉他烧了我不少，可能烧了我不少 token也无所谓了。我参与DeepSeek内测，他送了我1000块的额度，到现在还没有完全用完。所以你们在刚开始的时候还是回到项目，回到管理脑袋里面要有一个这样的模型，你不能直接把任务就丢给agent，你现在想的是先第一件事一定是创建一个空的这个。好，然后创建完了以后，你就会想你的下一步要迈向哪里，下一步我也给大家展示了，不能不能这样对吧？下一步不能是这样的，你需要的是往前再迈一小步，慢往前再迈一小步。所以你发现现在AI它从零开始做一个东西，做出来slop 的难度比他到一个成熟的项目里面去做一个维护性的任务要大很多。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_93.jpeg" data-desc-position="bottom"><img alt="画面 01:27:00" src="../assets/04/04_93.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_94.jpeg" data-desc-position="bottom"><img alt="画面 01:27:34" src="../assets/04/04_94.jpeg"></a></p>
+<p><strong>[01:27:57]</strong> 我们对软件工程的真正的要求，或者我如果我要跟一个team或者跟一个学生去谈论我们要设计一个什么什么软件的时候，我的问题是你能不能以不变应万变。也就是说你现在软件设计一个架构或者设计一个流程方法，能不能抵抗未来需求发生根本性的变化。所以你马上就看到，在刚才那个例子里，就是数据库说说我要我要生成一个这个对吧？要生成一个挣钱的产品，去挣这个宝妈们的钱。然后我真正需要的是一个能扩展的架构。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_95.jpeg" data-desc-position="bottom"><img alt="画面 01:28:00" src="../assets/04/04_95.jpeg"></a></p>
+<p><strong>[01:28:40]</strong> 当未来有别的需求来了，AI模型发生了变化。就我我其实我我在想这个软件工程的时候，或者说我的合作模式发生了变化。AI助教对吧？AI 助教有可能是文字的助教，有可能是图像的助教，有可能有交互，有可能没有交互。他各种各样的需求在不断变化的时候，我还有没有可能我的架构以最少的变化去应对需求的变化。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_96.jpeg" data-desc-position="bottom"><img alt="画面 01:29:00" src="../assets/04/04_96.jpeg"></a></p>
+<p><strong>[01:29:08]</strong> 而这个恰恰是大家在软件工程课也不教这个数据库，这操作系统课也不教，对吧？大家都说这个操作系统是长这样的，你为什么会今天你会看到一个这样的操作系统？为什么会看到一个这样的数据库？数据库为什么要这样做并发控制？都是有有这样的一个原因。但软件工程说的最不一样的地方就是对未来需求的变化。所以如果你们要比如。</p>
+<p><strong>[01:29:37]</strong> 说这两。</p>
+<p><strong>[01:29:38]</strong> 节课跟大家讲版本管理的时候，你要记得版本管理做的三件事儿，记住现在，记住历史，记住教训。这个是在agent的时代和软件工程，就古法编程的时代都都成立的。你需要现在就是因为你必须要有一个repository不管，是这个形式还是就现在的一个C或者C++的那Python 加所有的项目你都需要把文件管起来。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_97.jpeg" data-desc-position="bottom"><img alt="画面 01:30:00" src="../assets/04/04_97.jpeg"></a></p>
+<p><strong>[01:30:07]</strong> 么你记住历史是为了有一天你这个东西不要了，对吧？或者你删掉的一个东西，你最终发现对你是有用的，你还可以把它捞回来。然后在这个提交的历史过程当中，你能看到你是怎么演进到一个点，然后发现这件事情失败了。然后这个失败了可能你会留在这儿，然后你会回到另外一个点，再开始另外一个对吧？正确的正确的路线这些东西都是在版本控制里的。然后这些lessons不停的都在警示你，你需要怎么做，对吧？你需要你需要怎么样从第一步开始迈出向后的一小步，那肯定显然不应该是看看他已经实现完了吗？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_98.jpeg" data-desc-position="bottom"><img alt="画面 01:30:50" src="../assets/04/04_98.jpeg"></a></p>
+<p><strong>[01:31:00]</strong> 提交人民奖学。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_99.jpeg" data-desc-position="bottom"><img alt="画面 01:31:00" src="../assets/04/04_99.jpeg"></a></p>
+<p><strong>[01:31:02]</strong> 金申请证。</p>
+<p><strong>[01:31:04]</strong> 准备退课。</p>
+<p><strong>[01:31:19]</strong> 看有没有 git 哎，他倒是做了一个提交，直接一个提交。</p>
+<p><strong>[01:31:41]</strong> 引擎全部是真代码，手机端是真HTTP 服务是集成的，模拟的部分邮箱是没有的。哎好。</p>
+<p><strong>[01:31:58]</strong> 呃。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_100.jpeg" data-desc-position="bottom"><img alt="画面 01:32:00" src="../assets/04/04_100.jpeg"></a></p>
+<p><strong>[01:32:06]</strong> 它有一个入口层，它有一个编排层，有一个能力层，还是个非常典型的架构数据层，我就不不试图不试图review了，但显然它把它当成是了一个是一个业务逻辑系统来做。然后这其实是其实有非常大风险的，就是它看起来已经像一个教务系统了，这个软件已经看起来像一个教务系统。我下节课就会讲讲教务系统，而更其实现在更符合主流的best practice。</p>
+<p><strong>[01:32:41]</strong> 如果你真的要从零开始构建的话，你要用一个叫MVP的paradigm 叫minimum viable product或者minimal viable product有一个最小的验证版本。然后这有一句话叫。The biggest risk in product development is building something nobody wants.</p>
+<p><strong>[01:32:59]</strong> 就是你做的东西，就是你看他他做的东西就是我不要的对吧？这个东西绝大部分东西其实不是我要的。我刚才在他登代码的时候我解释了，我其实想想要的是什么，对吧？所以如果你要做一个最小的版本，其实他逼迫的是你要想清楚什么样的需求才是你绝对要的对吧？刚才我已经说了，如果我要一个课程的，如果我要做一个个人的助手，我最想要的是他能有让我提升我学习效率的能力和提升我工作效率的能力。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_101.jpeg" data-desc-position="bottom"><img alt="画面 01:33:00" src="../assets/04/04_101.jpeg"></a></p>
+<p><strong>[01:33:39]</strong> 你总结出了这两条以后，你可能在第一个这个MVP里面没有任何的数据库，对吧？因为你会想到在任何时候，当你文件系统膨胀的时候，你都可以说跟着直接说好，按照这个数据的组织帮我提炼出一个数据库，这个问题就结束了。所以你不需要在刚开始的时候就做数据库。因为一旦你带上一个数据库，你每一次数据库重构都需要让agent做这个database的迁移。但文件系统不一样，文件系统你自己就可以在你的这个文件管理器里去调整它的目录结构，逐渐梳理到你舒服的一个结构上。你看看你在里面调文件和你去调这个database的schema，你的心智负担是不一样的。人类已经训练过，对吧？人类对直观的东西已经训练的非常舒服了。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_102.jpeg" data-desc-position="bottom"><img alt="画面 01:34:00" src="../assets/04/04_102.jpeg"></a></p>
+<p><strong>[01:34:31]</strong> 文件目录在计算机里面操作。你从小吧从你小学的时候上电脑课开始，你就做这件事儿了。所以你对这个模式非常习惯。但一旦你说你要操作一个database schema的时候，你们很多同学还没有学过数据，估计你根本不知道它是什么。在你面对一个未知的东西的时候，你仍然能就你需要强行的说做一次概念的翻译，我这个东西脑袋里面是这样的概念，我要翻译到数据库里是这样的。</p>
+<p><strong>[01:34:55]</strong> 那你不如用一个你已经适应了熟悉了的这个system？用最简单的方式帮你把比如说这个文件的学习资料的管理，学习资料的进入，通知消息的进入，就甚至到我现在我自己回邮件的那agent，都没有用任何的数据库。我的流程大概是这样的，我的流程是我的那个每个 agent会收我的邮箱，然后会把那个email ID放到我的一个共享的云盘同步上，然后那个email ID里面会有它的这个agent解析出来的。比如说我回复的草稿，然后这个邮件的分类，是不是垃圾邮件这种，我然后再由下一级的流水线去处理。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_103.jpeg" data-desc-position="bottom"><img alt="画面 01:35:00" src="../assets/04/04_103.jpeg"></a></p>
+<p><strong>[01:35:44]</strong> 也就说我先明白的是我的系统里面有哪几级流水线。然后这几级流水线之间他们应该怎么协作，哪些东西通过云盘对吧？然后就比如说因为我很喜欢我的云盘，是不是引入云盘要做一些架构的修改，我希望邮件资料等都和云盘保持同步，对吧？这就叫需求的更改。我现在不知道它的架构做的好不好，我让agent帮我看一看。也就是说什么是一个好的软件架构，你当然在当前时候，你是有一个需求的，这个现在实现可能是满足这个需求的。但是当你的需求发生变更的时候，你相应的做出的那个变化是摧毁性的。是背上一个技术债还是别的，那就那就不知道了，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_104.jpeg" data-desc-position="bottom"><img alt="画面 01:35:55" src="../assets/04/04_104.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_105.jpeg" data-desc-position="bottom"><img alt="画面 01:36:00" src="../assets/04/04_105.jpeg"></a></p>
+<p><strong>[01:36:49]</strong> 然后我们来看一下它的设计，它有一个system.db。他要把个人资料放到这里，邮件归档也放到这里，索引草稿仍然在在低避。现在看起来还不会引起很大的问题，因为绝大部分都是这样的数据库，确实应该不会引起特别大的大的问题。但是随着这个项目的不断的进展，你就会你会发现你有一种开发方式是这样，就是你上来就是一个大的，然后好几大步就把需求都都实现完，然后就拖着这个技术债不断的往后迭代，往后加功能。还有一个是你从最小的就得到一个特别精巧的价格。我举个我为什么要举刚才那个例子？就当你发现我用Git管理这个学生的提交以后，很多事情都变得非常容易。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_106.jpeg" data-desc-position="bottom"><img alt="画面 01:37:00" src="../assets/04/04_106.jpeg"></a></p>
+<p><strong>[01:37:51]</strong> 而且我自己控制起来也会轻松轻松很多。直到我遇到性能瓶颈之前，我都不想要把它迁移到任何的一种数据库。然后这也意味着其实你早期的prompt对整个项目的走向的影响是最大的。你每一次就你最早的那个我直接把README 给他，还说我要做一个MVP，这都会对项目造成很大的影响。我下一节课就周日就会进入软件架构和构造的内容。好，今天下课。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_107.jpeg" data-desc-position="bottom"><img alt="画面 01:38:00" src="../assets/04/04_107.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/04/04_108.jpeg" data-desc-position="bottom"><img alt="画面 01:38:28" src="../assets/04/04_108.jpeg"></a></p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2026年9月21日 06:34:38 UTC"><span class="timeago" datetime="2026-09-21T06:34:38+00:00" locale="zh"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2026年9月21日 06:34:38 UTC">2026-09-21</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="创建日期">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"></path></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2026年9月21日 06:34:38 UTC"><span class="timeago" datetime="2026-09-21T06:34:38+00:00" locale="zh"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2026年9月21日 06:34:38 UTC">2026-09-21</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚">
+        
+          
+          <a href="../03-repository-management/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 第 3 讲 · 软件仓库管理">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                第 3 讲 · 软件仓库管理
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../about/" class="md-footer__link md-footer__link--next" aria-label="下一页: 关于本站">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                关于本站
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      课程内容版权归原讲者所有 · 转录文本以 CC BY-NC-SA 4.0 分享
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.footer", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../js/timeago.min.js"></script>
+      
+        <script src="../../js/timeago_mkdocs_material.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
