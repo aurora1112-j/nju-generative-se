@@ -14,6 +14,9 @@
 | 02 | 提示词工程 | 2026-09-09 | [B 站](https://www.bilibili.com/video/BV1CQt365EzW/) | [pdf/02-prompt-engineering.pdf](pdf/02-prompt-engineering.pdf) |
 | 03 | 软件仓库管理 | 2026-09-10 | [B 站](https://www.bilibili.com/video/BV1kybV6DE47/) | [pdf/03-repository-management.pdf](pdf/03-repository-management.pdf) |
 | 04 | 软件仓库管理（二） | 2026-09-15 | [B 站](https://www.bilibili.com/video/BV1Q6en6NEUo/) | [pdf/04-repository-management-2.pdf](pdf/04-repository-management-2.pdf) |
+| 05 | 软件工程的来龙去脉 | 2026-09-22 | [B 站](https://www.bilibili.com/video/BV1Nyeq6qEt8/) | [pdf/05-history-of-software-engineering.pdf](pdf/05-history-of-software-engineering.pdf) |
+| 06 | 需求和架构（一） | 2026-09-29 | [B 站](https://www.bilibili.com/video/BV1Rch76WEfQ/) | [pdf/06-requirements-architecture-1.pdf](pdf/06-requirements-architecture-1.pdf) |
+| 07 | 需求和架构（二） | 2026-10-06 | [B 站](https://www.bilibili.com/video/BV1JGap6LE74/) | [pdf/07-requirements-architecture-2.pdf](pdf/07-requirements-architecture-2.pdf) |
 
 *每周二随讲次更新 / Updated weekly after each lecture.*
 

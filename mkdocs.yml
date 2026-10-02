@@ -71,4 +71,7 @@ nav:
       - 第 2 讲 · 提示词工程: lectures/02-prompt-engineering.md
       - 第 3 讲 · 软件仓库管理: lectures/03-repository-management.md
       - 第 4 讲 · 软件仓库管理（二）: lectures/04-repository-management-2.md
+      - 第 5 讲 · 软件工程的来龙去脉: lectures/05-history-of-software-engineering.md
+      - 第 6 讲 · 需求和架构（一）: lectures/06-requirements-architecture-1.md
+      - 第 7 讲 · 需求和架构（二）: lectures/07-requirements-architecture-2.md
   - 关于本站: about.md

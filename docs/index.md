@@ -10,6 +10,9 @@
 | [第 2 讲](lectures/02-prompt-engineering.md) | 提示词工程 | 2026-09-09 | 01:38:26 | [BV1CQt365EzW](https://www.bilibili.com/video/BV1CQt365EzW/) |
 | [第 3 讲](lectures/03-repository-management.md) | 软件仓库管理 | 2026-09-10 | 01:40:13 | [BV1kybV6DE47](https://www.bilibili.com/video/BV1kybV6DE47/) |
 | [第 4 讲](lectures/04-repository-management-2.md) | 软件仓库管理（二） | 2026-09-15 | 01:38:29 | [BV1Q6en6NEUo](https://www.bilibili.com/video/BV1Q6en6NEUo/) |
+| [第 5 讲](lectures/05-history-of-software-engineering.md) | 软件工程的来龙去脉 | 2026-09-22 | 01:39:59 | [BV1Nyeq6qEt8](https://www.bilibili.com/video/BV1Nyeq6qEt8/) |
+| [第 6 讲](lectures/06-requirements-architecture-1.md) | 需求和架构（一） | 2026-09-29 | 01:36:50 | [BV1Rch76WEfQ](https://www.bilibili.com/video/BV1Rch76WEfQ/) |
+| [第 7 讲](lectures/07-requirements-architecture-2.md) | 需求和架构（二） | 2026-10-06 | 01:39:41 | [BV1JGap6LE74](https://www.bilibili.com/video/BV1JGap6LE74/) |
 
 *课程每周二 10:00-12:00 更新，转录随讲次持续追加。*
 
