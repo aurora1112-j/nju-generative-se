@@ -1,0 +1,1080 @@
+<!DOCTYPE html><html lang="zh" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="南京大学蒋炎岩《生成式软件工程》课程非官方图文转录（fan-made companion）">
+      
+      
+      
+        <link rel="canonical" href="https://aurora1112-j.github.io/nju-generative-se/lectures/07-requirements-architecture-2/">
+      
+      
+        <link rel="prev" href="../06-requirements-architecture-1/">
+      
+      
+        <link rel="next" href="../../about/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第 7 讲 · 需求和架构（二） - 生成式软件工程 · 图文转录</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue-grey">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="生成式软件工程 · 图文转录" class="md-header__button md-logo" aria-label="生成式软件工程 · 图文转录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            生成式软件工程 · 图文转录
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第 7 讲 · 需求和架构（二）
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue-grey" aria-label="切换到深色模式" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey" aria-label="切换到浅色模式" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aurora1112-j/nju-generative-se" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    aurora1112-j/nju-generative-se
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01-welcome-to-the-future/" class="md-tabs__link">
+          
+  
+  
+  课程转录
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于本站
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="生成式软件工程 · 图文转录" class="md-nav__button md-logo" aria-label="生成式软件工程 · 图文转录" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    生成式软件工程 · 图文转录
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aurora1112-j/nju-generative-se" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    aurora1112-j/nju-generative-se
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    课程转录
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    课程转录
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-welcome-to-the-future/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 1 讲 · 欢迎来到未来
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-prompt-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 2 讲 · 提示词工程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-repository-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 3 讲 · 软件仓库管理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-repository-management-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 4 讲 · 软件仓库管理（二）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-history-of-software-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 5 讲 · 软件工程的来龙去脉
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-requirements-architecture-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 6 讲 · 需求和架构（一）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 7 讲 · 需求和架构（二）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关于本站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>第 7 讲 · 需求和架构（二）</h1>
+
+<p>第 7 讲 · 需求和架构（二）</p>
+<div class="admonition quote">
+<p class="admonition-title">本讲信息</p>
+<p><strong>课程</strong>：南京大学《生成式软件工程》（蒋炎岩）
+<strong>原视频</strong>：<a href="https://www.bilibili.com/video/BV1JGap6LE74/">B 站 BV1JGap6LE74</a> · <strong>时长</strong>：01:39:41
+<strong>说明</strong>：非官方 fan-made 转录，仅作学习用途；内容版权归原讲者所有。转录错误以原视频为准。</p>
+</div>
+<hr>
+<p><strong>[00:00:00]</strong> 好，今天我们继续讲需求和架构的第二个部分。需求和架构其实有的时候是分不开的。因为我们从第一节课杰课就开始说，当我们要做一个软件或者做一个产品，它足够复杂的时候，你就会面对这个intent specification和implementation的。然后我们从最早的那个瀑布模型开始，你也看到我们是怎么样去理解那个 gap上用数据依赖的方式，去做一个minimal viable product，然后来控制这样的复杂性。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_01.jpeg" data-desc-position="bottom"><img alt="画面 00:00:00" src="../assets/07/07_01.jpeg"></a></p>
+<p><strong>[00:00:34]</strong> 实际上上一节课我们也讲到，当我们谈论这个需求和架构的时候，有一个原则就是代码之外有客户的规律，客户之外有社会的规律，社会之外带有宇宙的规律。所以你站在哪一个层面去看这个需求，对吧？你可能好上一节课的时候我带大家，大家可能还记得我去用浏览器操作的方式逆向了整个教务系统的这个需求。那不能是整个教务系统就是和教师相关的需求，然后得到了一份这个需求规格的说明书，然后那个说明书上写的很好，对吧？这个是这个是符合软件工程实践，也符合做产品的这样的一个做需求的方式。但是你作为整个系统的设计者或者整个系统的架构师，你可能要站在这个需求之外来去想。这些你当然是可以说好，我现在就选一个架构，选一个数据库，然后就把这些需求都实现了。你可以交付一个百分之百满足客户需求的产品。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_02.jpeg" data-desc-position="bottom"><img alt="画面 00:01:00" src="../assets/07/07_02.jpeg"></a></p>
+<p><strong>[00:01:37]</strong> 但是这个产品很有可能会在未来的维护当中陷入一个长期的泥潭。也就是说你在做任何设计的时候，做的那一刻起，你就背上了一定程度的技术债，然后你会一直一直要背下去。而且大家如果留意编程，就是在编程的时候注意过很多细节的话。其实我们从十行的代码，最小的一份代码。今天其实我还有几个例子。最小的代码到你可能要做一个50万行的代码、100万行代码、1000万行的代码。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_03.jpeg" data-desc-position="bottom"><img alt="画面 00:02:00" src="../assets/07/07_03.jpeg"></a></p>
+<p><strong>[00:02:05]</strong> 你要做一个大系统的时候，它其实这个架构都是无处不在的。而且上节课大家还记得有一个图说，我们从最初的时候，什么也没有的时候，我们就需要做决定。然后一旦我们做决定，那它就会影响未来的走向。所以其实你的软件架构的设计通常来讲都是有很大的改进空间的。所以你们如果做实验，我应该这两天会把下一个实验放上来。</p>
+<p><strong>[00:02:30]</strong> 做第一个实验的时候，你可以直接像我那次上课一样，直接把需求复制粘贴进去，让AI帮你直接做一个东西，然后你不停的跟他聊天修改。但是大家要记得，你如果马上第一反应说这个东西可以这样做吗？可以这样设计数据库，你的第一反应应该是，也许我可以回过头来再多想一想，可能会有更好的方案。好，这是上节课内容的一点回顾。我们谈软件工程的时候，Brooks 就说了，我们软件工程的本质就是驾驭复杂性。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_04.jpeg" data-desc-position="bottom"><img alt="画面 00:03:00" src="../assets/07/07_04.jpeg"></a></p>
+<p><strong>[00:03:07]</strong> 将来我们在谈需求的时候，你看到那个需求规格说明书的时候，你就知道现实中的软件是非常复杂的对吧？非常复杂，那有一些复杂性是没有办法消除的。这个problem domain里面的essential complexity？它的选课的问题就是这么复杂。我们要考虑这个课程的容量，先修的要求，时间的冲突，他要排一个对吧？还要排课，还要考虑教室的这个情况。我们的系统里面还支持，比如说我们的老师和同学都可以借教室。这个物理世界就是复杂的，而这个物理世界在信息世界里面的投影，它的这个复杂性是没有办法消除的那没有办法消除的时候，我们其实是用架构软件的架构来更好的去管理这样的复杂性。</p>
+<p><strong>[00:03:57]</strong> 除此之外，我们刚才讲到技术债，对吧？你在做任何实现决定的时候，如果我们要用这个数据库系统或者你就用文件系统管理的时候，你都会引入一个trade off space，对吧？你有时候你文件系统你你你是管理起来是很方便，我想hack它也很容易。但是你带来代价，它的性能可能远远不如数据库，而且它有并发控制的问题，文件系统本身是不支持这种原子性的事务，就是all nothing对吧？我要我可以读多个数据，写多个数据，并且整个读和写看起来是atomic的，就像我上了一把锁，然后stop the world一样。文件系统是没有这个保证的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_05.jpeg" data-desc-position="bottom"><img alt="画面 00:04:00" src="../assets/07/07_05.jpeg"></a></p>
+<p><strong>[00:04:37]</strong> 虽然其实有比较疯狂的人想要在操作系统里面实现这种文件系统级的transaction。数据库能够帮你实现transaction，但是它带来的缺点就是你每次调试的时候都需要经过一个中间层，对吧？你需要看数据库的时候，你不能像文件系统一样使用所有的unix工具去组合它。理论上说也可以对吧？你还是可以把和其他的工具组合起来。那样就会比如说让A阵做，就会引入一个额外的转换层，然后这些都是你做任何技术的选型都会有的这种accidental complexity，这两个要分开。然后其实好的，就如果你们在长期的学习各种各样好的软件架构的过程中，你们就会看到什么样的什么时候应该用什么样的架构来减少这个complexity，以及怎么样一个好的系统是怎么应对这个世界上面的这种esessential complexity的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_06.jpeg" data-desc-position="bottom"><img alt="画面 00:05:00" src="../assets/07/07_06.jpeg"></a></p>
+<p><strong>[00:05:35]</strong> 对所以其实一定程度上需求工程就是去直接面对这个系统里面的essential complexity。他承认软件系统就是复杂的，然后我需要不停的和客户去沟通，把需求我到底要什么这件事情想清楚。不管是你们看到现在的这个就经典的对吧？我们说让GPT写了一个需求规格说明书，还是你今天可能会有那种map co的，那种grime的skill，我其实推荐大家去试用一下。你你你做任何一个小的东西的时候，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_07.jpeg" data-desc-position="bottom"><img alt="画面 00:06:00" src="../assets/07/07_07.jpeg"></a></p>
+<p><strong>[00:06:09]</strong> 比如说我就要做一个购物车，打个比方，然后那就会把你所有的细节都给你问一遍，你到底要怎么做authentication。这个authentication你是接入一个第三方的那种微信公众号的认证，还是你要自己做一个login page？然后这时候其实你的每一个选择在这个需求其实这个还是需求层面的东西，你的每一个选择都会。都会有很大的影响。</p>
+<p><strong>[00:06:36]</strong> 如果你直接比如说就把这个需求直接交给 GPT 做，说我要login，那gp就会给你猜一个对吧？猜一个的时候他可能会说你需要注册用户。好，注册用户马上带来的问题是用户要输入用户名和密码，这个肯定没问题。第一次的时候密码会需要一个confirmation。</p>
+<p><strong>[00:06:54]</strong> 好，接下来就是你要不要做一个忘记密码的功能。如果你没有忘记密码的功能，用户一定会忘掉密码的那对于用忘掉用密码的用户来说，这就是一个非常糟糕的体验。因为它的数据留在里面了，它没有办法再access了。然后如果你要解决这个忘记密码的功能，你要么要给他发短信，要么给他发邮件。好，发邮件的时候你用什么来发邮件对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_08.jpeg" data-desc-position="bottom"><img alt="画面 00:07:00" src="../assets/07/07_08.jpeg"></a></p>
+<p><strong>[00:07:18]</strong> 然后你当你把这些问题不断的往后想的时候，你你你当时觉得ok因为所有人都有一个用户密码登录，所以我的软件也理所应当做一个用户密码登录。但你可能做这个设计或者说需求，你做这件事情的时候，你就已经进入了一个泥潭，对吧？泥潭。所以有时候你想哈那我还是用微信的登录比较好，对吧？微信或者别的，因为你看到现在的，比如说你们注册一个网站，很多都支持微信或者支付宝登录，因为这是一个更方便的模式。</p>
+<p><strong>[00:07:50]</strong> 好，那怎么办呢？你要交钱，而且个人对这个对个人开发者可能不是很友好。你可能需要一个公司实体他才能注册，因为你你个人承担责任的能力是和公司是不一样的。公司某种程度上你需要遵守一定的东西才能注册，对吧？然后这就就变得非常复杂，就仅仅是登录这一件事，你就有无穷的细节，然后进入进去以后又有各种各样的其他的细节。所以在需求里面，一方面我们可以深度优先，其实这两个是不矛盾的。第一个是我们可以深度优先去做一个MVP，然后这MVP可以快速的让你知道那些最重要的需求功能点，你到底是不是满足了，满足到什么程度。然后这个软件比如说需求要不要重做？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_09.jpeg" data-desc-position="bottom"><img alt="画面 00:08:00" src="../assets/07/07_09.jpeg"></a></p>
+<p><strong>[00:08:37]</strong> 第一第二轮的重做，以及你的思维方式同样也需要一定的广度优先。我们有很多的决策，我们的登录框到底是选哪一种方式来实现，然后我们的界面到底是怎么样布局，第一个首页到底怎么怎么展现，这些都是需求space里面的里面的东西。然后直到总有一天，你还是需要把这个需求以某种方式写出来的。理论上说就是代码本身就是需求。因为我们可以让大语言模型，就你打比方，你可以把所有的文档都删掉，一个实际的项目，然后你就让AI去运行代码，读代码，然后他可以把这些需求点给还原出来，但还原出来的这个需求点就会非常长对吧？它没有一个可能也可以有一个从顶到上的理由的设计，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_10.jpeg" data-desc-position="bottom"><img alt="画面 00:09:00" src="../assets/07/07_10.jpeg"></a></p>
+<p><strong>[00:09:30]</strong> 我们的整个软件系统的设计需求的宗旨是不要搞太复杂，要简化复杂性，要管理好我们的个就如果我我我实现起来麻烦的东西，我最好是交给一个第三方来管理，那这就是你的你的设计哲学。然后也可能你的产品它不是这样，它就是需要用户名和密码，然后你就想要管理这个用户的数据。比如说你可能就是想要偷这个用户的密码，去去构建自己的密码库。当然这个事情肯定是不合规的，但在你体量足够小的时候，你可能你就想想要做做这件事儿。所以这其实是一个权衡，你可能需要在深度优先和广度优先之间达到一个比较好的平衡。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_11.jpeg" data-desc-position="bottom"><img alt="画面 00:10:00" src="../assets/07/07_11.jpeg"></a></p>
+<p><strong>[00:10:21]</strong> 那就只能做动手做对吧？你一方面你去想一个软件系统，它它为什么做的这个设计？然后如果我换另外一个设计，它会变好还是变坏，对吧？我不知道你们上节课看完了教务系统以后，有没有想想如果你来实现这个教务系统，你你会你会怎么做对吧？怎么做？所以这是一些这些需求工程，这个好像没有特别的办法，你只能看得多做的多。</p>
+<p><strong>[00:10:45]</strong> 所以我今天当然今天也会讲一些具体的系统的实现。然后需求之外就是架构，架构有两个刚才讲到有两个主要的作用，第一个是分解以三手。就有些东西是确实是没有办法避免的，但是你有可能把它隔离在不同的模块里，然后把这个模块之间做一个很好的接口的切分。就比如说数据库就是一个非常好的架构设计对吧？MVC我今天会讲MVC，当你把数据放到数据库以后，你就再也不用关心数据是怎么存储的了。它给你一个很好的contract，尤其是你使用比如说云云厂商的数据库的时候，他一般都会有给你备份的承诺，就是你数据不会丢的，最多就是可能一段时间出问题了，然后他可能会降低你的availability，但是你的备份很快就能顶上，然后这个数据库访问起来几乎是没有任何的感觉的。这样你对数据的可靠性，然后数据访问的原子性，那这些你都不用担心了，你就可以更好的关注在你的业务需求上。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_12.jpeg" data-desc-position="bottom"><img alt="画面 00:11:00" src="../assets/07/07_12.jpeg"></a></p>
+<p><strong>[00:11:53]</strong> 当然数据库本身是一个通用的system，你可以把一些你的逻辑就下放给数据库。然后同样你在你自己的软件系统里面也可以设计不同的模块。比如说你的信息系统对吧？学校最最希望的是打造一个全部打通的信息系统。你填任何信息，你不需要在这里填一次那里填一次，这里填一次，那里填一次。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_13.jpeg" data-desc-position="bottom"><img alt="画面 00:12:00" src="../assets/07/07_13.jpeg"></a></p>
+<p><strong>[00:12:19]</strong> 然后我们花了很长的时间才完成了这个统一身份认证和打通。但学校里面其实还有很多的系统可能你们没有用过。比如说你们不涉及财务系统，对吧？你你们你们不你们不从学校领工资，然后也不管理这个，也不管理项目。那你们可能会给老师，如果研究生的话，可能会给老师报销过这个。一些单据，那就是非常麻烦的一个财务系统。</p>
+<p><strong>[00:12:40]</strong> 财务系统就完没有完全和现在的系统打通，这也是可以理解的。因为财务系统里面有很多领域知识，对吧？他有大量的领域知识，他要把账做平，接受审计。这些功能本身是在他的领域里。</p>
+<p><strong>[00:12:55]</strong> 现在财务系统和其他的部分还没有很好的连起来。比如说实现数据的共享通知的推送这些。但是其实这是一个比较好比较我们希望得到的一个功能，也希望是需求能够需求和架构能够做到做做到这一点。然后架构能够在一定程度上就是收缩这个specification和information space的可能性。我们的需求对吧？需求就是去收索intenspace的不确定性，我们说会会漂移对吧？在这里我们的intent到spec到implementation，那每一个intent的可能性都会有多种不同的spec 的实现，然后每一个specification又可以有多种implementation的实现。所以为了减少这样的漂移需求，实际上是收缩了inspace的不确定性，然后架构是收缩了这个spec和intationspace的可能性，但你一旦确定的时候，你就会背上一定程度的技术债。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_14.jpeg" data-desc-position="bottom"><img alt="画面 00:13:00" src="../assets/07/07_14.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_15.jpeg" data-desc-position="bottom"><img alt="画面 00:14:00" src="../assets/07/07_15.jpeg"></a></p>
+<p><strong>[00:14:14]</strong> 这个是上一节课的内容，然后好，但还是觉得不知道我说了什么，对吧？不知道说了什么。然后我就发现一件很有意思的事儿，我最近读了又重新读了一些老paper。然后我发现在你这这其实在软甚至软件工程诞生的初期，甚至更早的时候，我们其实已经有很多的大家们思考过。比如说软件或者程序应该怎么构造。哪怕如果你去看它的原文的话，我这里有它的maybe I one。这是make note tes on data structure，这是叫结构化程序设计。我还是用PDF来打开它，对吧。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_16.jpeg" data-desc-position="bottom"><img alt="画面 00:15:00" src="../assets/07/07_16.jpeg"></a></p>
+<p><strong>[00:15:23]</strong> 很很有意思的一本老书。你看到里面的里面的程序，你就知道这不是一个现在意义上的软件工程的事。你看到它都是在讲这种相对比较小的程序，你的这个你还能看到这样的流程图，它讲顺序结构、选择结构、循环结构。它的argument是其实我们不需要go to，在那个时候他们还在争论对吧？Go to is harmful.</p>
+<p><strong>[00:15:52]</strong> 你只需要用这个顺序选择循环这种diagram的方式，就可以表示任何的程序逻辑。他们还在argue这种它是一个比较小的函数的这个事情。然后我们可以找到里面的一些示例的程序，让我们来找一个。这看起来还是非常简单的程序，但是这个程序开始出现一些结构了对吧？它反正这个书写的很好，那我们当然不应该用这种传统的方式来读它，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_17.jpeg" data-desc-position="bottom"><img alt="画面 00:16:00" src="../assets/07/07_17.jpeg"></a></p>
+<p><strong>[00:16:36]</strong> 我想阅读这个结构化程序设计，能先帮我总结一下全书。怎么说呢？读书是不可避免的对对大家来说，但是我突然发现在今天读书比以前要变得容易了。前提是你用上正确的好用的AI工具。我因为我我我就前两天的时候，我干了这样的一件事。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_18.jpeg" data-desc-position="bottom"><img alt="画面 00:17:00" src="../assets/07/07_18.jpeg"></a></p>
+<p><strong>[00:17:09]</strong> 我给每一个我的博士生的建议，都我都我都告诉他们，你需要去读一些这种经典的文献。比如说因为我自己做这个操作系统PR软件工程相关的，我就会说这三个领域可能从1980年到2010年是一个golden age。然后在那个后面以后做的东西都更加就越做越小，这个算是比较越做越窄了。那但是在比如说1980年到2011年的时候，他还有很多这种天马行空的想法。在这个系统还不存在的时候，他怎么把这些东西给构建出来。</p>
+<p><strong>[00:17:47]</strong> 然后我就昨天，还是前两天，我让我的bot kser送了一些grobobot额度，他有一台云电脑在后面，然后我就说好，你去帮我收集1980年到2010年的我觉得值得读的systems的文献。然后他找1000个他就找1000个，他大概每个领域就找了两三百篇。然后我我因为我我基本上那些文献大部分都读过，然后我就仔细的核对那里面的列表，然后发现他找的列表还是非常好的，就是基本上都是我觉得很多文章也是我会推荐的文章，然后这就是一件非常恐怖的事情。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_19.jpeg" data-desc-position="bottom"><img alt="画面 00:18:00" src="../assets/07/07_19.jpeg"></a></p>
+<p><strong>[00:18:24]</strong> 然后我我现在我现在比如说我开车的时候，我就会打开一个GPT或者打开一个 Claude，我会跟他聊天，然后聊天的时候我就可以说好聊一篇paper。因为那我的paper会像，我的paper会在这里被锁被被锁引上。对我的paper会被索引。然后这样的话我的AI其实实际上是可以看到这个paper的全文的。</p>
+<p><strong>[00:18:57]</strong> 然后我只要把paper丢进去，然后接进去以后，我就可以比如说一边开车一边今天这个paper是怎么读的，我有一次教过大家怎么读paper。我从你自己知道的知识开始，把你的把你的领域不停的往外扩张。你要解决什么问题？一个你可能你不知道的问题，然后用了你什么样不知道的手段，然后得到了什么样的结论。然后和你所有的知识连成一个网络，然后你最终就理解了这个paper，然后它这里面就有很多我觉得真的是能给人很多启发的东西。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_20.jpeg" data-desc-position="bottom"><img alt="画面 00:19:00" src="../assets/07/07_20.jpeg"></a></p>
+<p><strong>[00:19:35]</strong> 首先这个打家上来就说这个。Our inability to do much. 我们人本身刚才我们讲了，比如说需求就是复杂的，然后我们要做架构。但实际上为什么需要做这件事呢？就是因为我们的人的能力是有限的，我们是一个参数有限的大模型。对我们还是承认我们自己是是大模型，所以这里面I have a very small head，and I hadbetter to learn to live with it and to respect my limitations and give them full credit, rather than trying to ignore.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_21.jpeg" data-desc-position="bottom"><img alt="画面 00:20:00" src="../assets/07/07_21.jpeg"></a></p>
+<p><strong>[00:20:07]</strong> 所以这里就有很多有意思的想法，对吧？他说用抽象加上层次的分解structured programming，你看起来这个概念已经过时了。就是我们现在是object oriented对吧？面向对象，然后还有很多这种比较fancy的框架，你们用前端的，可能用React 或者 Vue。这两批社区的开发者至今还在圣战对吧？就像以前vim和Emacs的开发者还在圣战对吧？虽然他们两个都越像了，但你看到这些今天所有的这些东西在过去，其实他们已经想想过一遍了，他需要用一个层次化的分解方式，把人不能依次理解的东西变成人可以逐层理解的东西。</p>
+<p><strong>[00:20:55]</strong> 然后这里面有很多我真的是特别喜欢的观点。比如说我看我有没有sli呃，有一个ormental AI呃枚举归纳和抽象。这个Parman最重要的，你就就我们的人脑可以干的就是这三件事情。你如果去看那里面的案例，它今在今天看来都是小程序。刚才带大家看过，但是他做了一个比喻，他说我们要做一个程序，或者你就想象成做一个软件系统，你就要做，你做的其实是一个necklace，它要做一个项链，然后项链上的珍珠，每个项链上的小珍珠把它串起来得到一个软件。这个比其实就是在分解，就要告诉你要分解复杂性它怎么样，对吧？把一个人类不能理解的东西变成人类可以逐个理解的东西。好，然后你看这样一本书，你就这样想，老师可能会在课上推荐大家也许是比如说我在课上推荐大家读一本书，也许是我我们的你们看某一本教科书的时候，后面有一个角注说我的这个想法教科书的想法来自于这一本书。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_22.jpeg" data-desc-position="bottom"><img alt="画面 00:21:00" src="../assets/07/07_22.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_23.jpeg" data-desc-position="bottom"><img alt="画面 00:22:00" src="../assets/07/07_23.jpeg"></a></p>
+<p><strong>[00:22:10]</strong> 我不知道你们有没有留意过，如果你们读一些比如说经典的这个programming language，或者软件设计的时候，它可能都会引用这个。对，因为这个太有名了，都会引用到这本书。然后在引用这本书的时候，你们有两种选择，一种是这个，当然我觉得我读书的时候都基本上也都必须要面临这个选择。就是看一下大家好像写过这本书，忽略它。因为如果我要把这本书找挖出来，然后再去读它，这件事情对我来说会浪费太多的时间。但对大家来说，你们现在就可以？一直是可以直接去用原始的最原始的第一手信息，去按照你自己想要的方式来处理。</p>
+<p><strong>[00:22:57]</strong> 好，这里其实还是有很多东西，你看他讲了class和object，这是1972年对吧？1972年class and object。然后协程他考虑的是怎么样构造各种各样的概念层次。它为什么要发明协程呢？协程和线程其实很像我上课的时候，线程打什么？比方线程，就比方成人，然后这个shared的memory就是物理的空间，所以人和人之间是协作的，每个人都有他自己的memory，对吧？我自己有自己的memory，我知道我做到哪一步了，我今天要干什么，明天要干什么。但同时我在这个shared space里面又有一些共享的事情，我们要合作完成任务，那我们人和人之间的通信communication就成为了一个协议。这样我就可以把复杂性隔离在对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_24.jpeg" data-desc-position="bottom"><img alt="画面 00:23:00" src="../assets/07/07_24.jpeg"></a></p>
+<p><strong>[00:23:47]</strong> 我我可以把一个工作我可以把一个工作分解成三条线，它们最终共同完成工作。然后他们之间可以通过一个数据结构来或者一个什么东西来来共享？他们可以不断的向前进度进展可以不断的向前，然后他们要互相通信来完成整个任务？然后他举了一些这样的博弈下棋的例子，还有编译器的例子。然后有一个概念层次的金字塔。你看最终你如果今天去看那些好的设计的好的软件软件系统的话，我们做的事情无非就是这个书里面其实已经讲过的事情。所以我们让AI来带，我们就今天假设大家前面的东西都已经多多少少知道，但其实你们不知道对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_25.jpeg" data-desc-position="bottom"><img alt="画面 00:24:00" src="../assets/07/07_25.jpeg"></a></p>
+<p><strong>[00:24:50]</strong> 你们可能只是在上操作系统课的时候第一次听说了coroutine。然后coroutine在在今天的意义下，更多的是一个为了性能实现的轻量级的线程。比如说够的那种协程的模型，它就是为了让你能够像现成一样用的很开心。同时它的每一个协程的切换和blocking的开销都非常小。来因为基闻已经是现成模型了，那个时候你看几乎没有它没有现成的现成的模型。但是如果你回到它设计这些机制的基础上，就回到那个时间点，你会知道他们其实是在应对软件世界里面的复杂性。好，那我们就试一试试一试，这实因为我也没有仔细读过。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_26.jpeg" data-desc-position="bottom"><img alt="画面 00:25:00" src="../assets/07/07_26.jpeg"></a></p>
+<p><strong>[00:25:43]</strong> 应该是part three的。面向上课的本科生？看一看他对这件事情的理解，这个时候他会去读原文，然后这个原文哪怕你就让它翻译，然后去掉一些你觉得不太必要的部分，这都是很好的。把数据加操作打包成一个概念，再用前缀机制把概念一层一层搭起来，这就是抽象。所谓的抽象，你要做一个模块，不管加到什么名字？一个模块你是用这个class和method，你都需要把这个实现内部的复杂性。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_27.jpeg" data-desc-position="bottom"><img alt="画面 00:26:00" src="../assets/07/07_27.jpeg"></a></p>
+<p><strong>[00:26:33]</strong> 比如说一个选课，或者一门上课。上课这件事儿和系统的其他部分要一定程度上隔离开来。我可以比如说和教室的管理，什么一个教室一个课程，然后他他之间怎么关联，要适当的做这样的分类。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_28.jpeg" data-desc-position="bottom"><img alt="画面 00:27:00" src="../assets/07/07_28.jpeg"></a></p>
+<p><strong>[00:27:01]</strong> 他讲了很多比较有意思的观察。他他说学生写的程序为什么这么烂？是因为一次要同时在脑子里面的东西太多。这个时候你想一想，你们平时哪怕是写OJ题，什么样的题你觉得挑起来最困难？可能不是模拟题，可能是那种需要一点数学性质，比如说动态规划这样的题。你们调这个题，如果你第一次就对了，样例对了，然后数据也对了，可能还挺好的。</p>
+<p><strong>[00:27:34]</strong> 如果你一个1 200行的动态规划，你然你你这时候错了，你根本就不知道怎么挑起。这是为什么呢？是因为就这个程序动一个动态规划的程序会比其他程序更难分层。因为你想如果是个模拟，你多多少少还可以把模拟的几个大的部分给分开，封装成一个class。然后这个class你可以单独测试，单独调试。而且你很容易把那个程序的一个中间状态映射到一个你能理解的对吧？你能理解的一个实际物理有物理含义的状态上。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_29.jpeg" data-desc-position="bottom"><img alt="画面 00:28:00" src="../assets/07/07_29.jpeg"></a></p>
+<p><strong>[00:28:09]</strong> 而如果你是调一个像动态规划这种2 300行的动态规划好，那就是灾难。因为它中间是一个数学，是一个纯粹的数学表示。然后这时候你就可以想你有没有可能把这个动态规划的这个层次或者是这个状态改成你能够以我们熟悉的方式去观测它。这事情实际上是可以办到的。就因为我们每一本书上写，比如说写动态规划都是什么DPIJK对吧？</p>
+<p><strong>[00:28:38]</strong> 然后你们写的时候也是个 DP然后就for i for j for k然后你只要有一个小的地方弄错了，那整个就全部都错了。而且错有的时候它不会crash，你crash反而好找。你知道这个地方越界了，如果它不crash，它就算出一个错的值，对吧？就你转移的时候弄错了，你就错了。</p>
+<p><strong>[00:28:57]</strong> 但实际上在我们谈论这个dp IJK的时候，我们其实是有一个问题的，是有个优化。一般来讲是一个优化问题对吧？有个优化问题，然后这个优化问题本身是有一个图结构的，也可能是一个图或者别的什么样的结构。然后这个动态规划本质上是在一个状态空间上面做对吧？它有一个无后效性，一个有向无环图，这就是一层抽象。然后在我们写DPHK的时候，其实把这个抽象给扔掉了。你不你虽然我们在思考问题的时候是工作在这个抽象层级上，但是你在写代码的时候把它扔掉了。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_30.jpeg" data-desc-position="bottom"><img alt="画面 00:29:00" src="../assets/07/07_30.jpeg"></a></p>
+<p><strong>[00:29:37]</strong> 所以其实你可以做的是把这个概念状态的概念给放回来。你可以知道D1PIJK它到底代表什么含义。然后你可以把它可视甚至把它可视化出来，甚至可以把这些关联的状态和迁移给打印出来。比如说你可以你可以实现一个比如说cat descendant of IJK，然后它可以返回一个你的状态的迁移，所有的所有可能的迁移。然后你做了这层抽象以后，当然这个可能还是不够好，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_31.jpeg" data-desc-position="bottom"><img alt="画面 00:30:00" src="../assets/07/07_31.jpeg"></a></p>
+<p><strong>[00:30:20]</strong> 你可以用一个更好的抽象，比如说state来替代它。这样你一层一层的做抽象，这个程序你就可以调试了。然后你调完了以后，你可以把这个再改写成等价的更高效的形式。你看这也是一个小的小小的架构，当然这这是这是小小的例子。然后你你你各种各样更大的例子的时候，他举了一些像如果你要模拟并行的时候，你就可以创造一个模型，你你你不需要模拟并行，你可以强行的直接模拟，对吧。你说有一个状态机，状态机然后直接模拟，然后你也可以做一个quarting的抽象。这样你只要做出合适的抽象，你hold，wait, activate和simulate它做出一个合适的抽象，你就可以去模拟时间和你直接上手去写一个模拟是啊是很不一样的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_32.jpeg" data-desc-position="bottom"><img alt="画面 00:31:00" src="../assets/07/07_32.jpeg"></a></p>
+<p><strong>[00:31:19]</strong> 这个可能我没有很长就停下。比如说你如果对这个地方不太明白，我相信因为我有这个概念了，我知道他在说什么，你们如果没有你就可以继续的继续的追问，甚至是你可以跟比如说 ChatGPT 开一个语音的赛。因为我最近发现这个feature很好用。大概就是从今年开始，GPT的实时语音模型可以在在后台调用一个更好的思考的模型，并且它可以保持和你对话，这是一个很好的 feature。</p>
+<p><strong>[00:31:54]</strong> 你可以？你可以把论文丢进去，然后你一边问他一些简单，他可以直接立即回你。然后一边你问他一个，比如说你能不能给我想一个打比方，符合现代软件前端的例子，对吧？完全取决于你的提示词，这取决于你的想象力到什么什么程度。我不知道DeepSeek 能给什么，我完全不知道。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_33.jpeg" data-desc-position="bottom"><img alt="画面 00:32:00" src="../assets/07/07_33.jpeg"></a></p>
+<p><strong>[00:32:21]</strong> 但是如果你有一个更好的模型的话，它。你看好这个Reactt sc和fiber fiber架构对吧？它找到了这个对应。好，如果我可以再再上升一步，比如说如果我不想谈具体的例子，只是。</p>
+<p><strong>[00:32:50]</strong> 抽象的想法有什么？现在最经典的预训练的模型就它没有web search？它没有web search。如果预训练的模型它就会从脑子里面找到它的那个直觉。但如果你有web search的话，你可以要求gp去调研一百篇1000篇论文，或者从我的那个池子里面的一千篇论文里面选一个最好的符合这个的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_34.jpeg" data-desc-position="bottom"><img alt="画面 00:33:00" src="../assets/07/07_34.jpeg"></a></p>
+<p><strong>[00:33:16]</strong> 他找了一些有意思的unix关系数据库，interface trade protocol TCP/IP，都是告诉你要做一个好的抽象，很有意思。这几个例子我今天上课都会讲，所以某种程度上我们还是达成了一定的一致。对，就是我我觉得可能这门课我讲讲什么东西都是不够的，因为我在这一门课上我没有办法把那一千篇对吧？比如说我刚才讲system software，你读PhD的话，在我这里读的话，你得把它把它多多少少都读了。这个还是一个很恐怖的事情。然后但是你们得到启发是读书可能也许没有那么的困难。然后我就在找这些的时候，我就在在准备今天的课的时候，我就又去找了一些有点老的材料。那刚才那是1972年，然后就想如果要到19，比如说80年、1990年的时候，我们又怎么来看这件事儿，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_35.jpeg" data-desc-position="bottom"><img alt="画面 00:34:00" src="../assets/07/07_35.jpeg"></a></p>
+<p><strong>[00:34:30]</strong> 然后我就找到了一个很有意思的talk他是scheme的设计者。对，他是scheme的设计者，也是这个Javalanguage specification的合作者。如果你们读过我读过那个Java加Java language和javirtual machine，他会告诉你语言和讯息是怎么怎么设计的。</p>
+<p><strong>[00:34:52]</strong> 然后他在OOPSLA的时候，就是programming language里面的一个讲object oriented的顶级会议。他在98年的时候给了一个keynote。那个时候他已经当然已经是功成名就了，对吧？作为那个时候最火的语言之一的设计者，他他写了一篇文章叫做Growing a Language。我们也来。Article.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_36.jpeg" data-desc-position="bottom"><img alt="画面 00:35:00" src="../assets/07/07_36.jpeg"></a></p>
+<p><strong>[00:35:31]</strong> Growing language我让他直接帮我打开嗯，我想要阅读。</p>
+<p><strong>[00:35:56]</strong> 是这样，它打开PDF OK。对你你第一次看到它的时候，就是我们作为后人，看到这里有一个PDF。如果你第一次看到他的时候，你会说这是什么呢？Most of the time I do not read my talks，对吧？这个你没理解。如果你直接看到它的时候你没有理解，然后你往后翻到一个这个好像是个什么东西，然后就把它关掉了对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_37.jpeg" data-desc-position="bottom"><img alt="画面 00:36:00" src="../assets/07/07_37.jpeg"></a></p>
+<p><strong>[00:36:31]</strong> 你因为你看到这么多字十几页，你想你你你会停下来吗？对吧？停下来吗？所以你应该停下来，这个talk非常有趣，它是一个表演性的演讲。他是写，所以他说I have to read他想要读出来，他全篇都只用单音节英文词，然后遇上所有的双音节以上的词必须当场定义，就跟我说写一个藏头诗或者写一个全是一个音的文章一样，他就做了一个非常炫技的个。所以你看到这就这个品味和AI stuff就是不一样的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_38.jpeg" data-desc-position="bottom"><img alt="画面 00:37:00" src="../assets/07/07_38.jpeg"></a></p>
+<p><strong>[00:37:15]</strong> AI stuff写不出这种东西，就或者说你需要至少从今天的角度来看，你还需要人类的创造力，你才能想到这件事。而且他用这个方式来讲Growing a Language，就是如果一个语言这个language双关的，你如果要让一个语言能够使用，它刚开始的时候是一个全篇只用单音节英文词，然后他就发现这个语言很难用，当然是说对人类来说很难用。我觉得如果是AI的话，他应该能够做出。</p>
+<p><strong>[00:37:45]</strong> 就我觉得今天我可以写一个东西来challenge它，这个文章就全部是用单音节的英文词写的，但是它读起来就完全没有任何问题。他讲的是如果遇到双音节以上的词，woman machine, vocabulary, programming, computer, 必须当场定义。然后这样他就会遇到一个就会遇到那不打开它了，他就会遇到瓶颈，对吧？你你你想要定一个复杂的东西，想要讲清楚任何东西都变得很复杂。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_39.jpeg" data-desc-position="bottom"><img alt="画面 00:38:00" src="../assets/07/07_39.jpeg"></a></p>
+<p><strong>[00:38:16]</strong> 然后他就用这样的一个很有趣的开场讲了编程programming language里的这个问题。所有的编程语言相对于英语，相对于用户需求都很小，对吧？是的，因为它需编程语言需要有一个formal semantics，它要有形式语义。它要如果这个语言变得非常大，语言里面有这种woman这种概念，那它的形式语义是什么？你定义不出来，而必须有形式语义的东西才能在计算机上执行。所以编程语言都相对来说比较小。然后如果你的编程语言在设计的时候是一个minimal design，就最小。比如说你没用过brain ****对吧？那就完全无法写，你们没有笑，所以。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_40.jpeg" data-desc-position="bottom"><img alt="画面 00:39:00" src="../assets/07/07_40.jpeg"></a></p>
+<p><strong>[00:39:13]</strong> 你们想他应该是知道他有预料的，基本上就是个图灵机。就是他把图灵机直接编码成他竟然还要写工具。对他语言基本上就是这样的一串东西，它有一个纸理解成类似图形记有个纸袋，然后你可以往左往右然后做做加法可以判断，对吧？比如说这是一个hello world的程序，对它它最小它满足最小。但当然人类不可读，实际编程语言是当然是不会那么的离谱，还是可以用的。</p>
+<p><strong>[00:39:53]</strong> 但是可以用的意味着比如说C你们C其实是一个设计的非常经典的语言，但是C也带来了很多的设计上的问题。比如说它就没有运算符的重载，对吧？它没有运算符重载。你在写表达这种，比如说你要表达一个往队列里面放东西，如果你们写戏写多的话，就知道这是一件多么恐怖的事情。然后你再看那个C里面有很多比如说这种东西，对吧？qsort, 你们可能学过对吧？因为学过C 语言就用设计的非常糟糕的api对，它有一个的compare的指针，然后它需要这个签名竟然是const void的，然后anyway这个呃到一个数组里面还需要这个nmemb 和 size两个参数对吧，就C没有这个没有这样的能力让你自定义比较好的语言抽象，所以它的表达任何东西的时候都会遇到困难。你看这两件事情在现实意义上，就他用单音节词去需要定义双音节词的时候，就遇到了困难，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_41.jpeg" data-desc-position="bottom"><img alt="画面 00:40:00" src="../assets/07/07_41.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_42.jpeg" data-desc-position="bottom"><img alt="画面 00:41:00" src="../assets/07/07_42.jpeg"></a></p>
+<p><strong>[00:41:11]</strong> 小的语言好移植就好好用，但是满足不了各种各样膨胀的需求。但是一次设计好，一个大语言的体量大，交付慢，就会在成功前被每一个某一个小而丑的语言取代。所以你看C就是典型非常典型的成功者，他在有些方面很成功，对吧？</p>
+<p><strong>[00:41:31]</strong> 我们喜欢C很大程度上是因为它直接和机器是一一对应的，它没有额外的抽象，所以这就是一个可以移植到几乎任何地方的编程语言。然后但是在人力写代码的年代，对我们写编译器是一个非常复杂的复杂的事情。所以在这个意义下，他做了一个编程语言的架构。你看我今天讲的是架构什么样的。就当谈架构的时候，大家都会觉得软件是个架构，我要用什么样的数据库对吧？我要设计什么样的class来表示student，设计什么样的class来表示course，这个叫叫软，但这是软件架构的一部分。实际上你的编程语言里面有什么？这件事情本身也是架构。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_43.jpeg" data-desc-position="bottom"><img alt="画面 00:42:00" src="../assets/07/07_43.jpeg"></a></p>
+<p><strong>[00:42:20]</strong> 我前面讲那个QR code的二维码的例子是我就创建了一个小的编程语言，这也是一个架构。所以这个架构提了一个非常深刻的问题，说这个出路不是二选一，而是生长。也就是说你的这和其实软件的需求又是对吧？我前面上第一次课时候我就讲一个好的软件，它能够或者是软件的设计，它能够抵抗需求的变更。当需求变化，世界发生变化的时候，你一定程度上你在现在可以前瞻性的看到一点，这个未来会发生什么。如果你只是针对现在设计，你可能没有考虑到这个软件应该怎么样的生长。它有可能就会陷入一个一个技术债的泥潭。你需要有这个生长的能力的架构是是最好的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_44.jpeg" data-desc-position="bottom"><img alt="画面 00:43:00" src="../assets/07/07_44.jpeg"></a></p>
+<p><strong>[00:43:16]</strong> 然后他举了一些例子，比如说一些老的语言，这些语言你们应该都没有用过的，我还用过Pascal，然后C和从C到C++是一个长出来，但我觉得C++长得并不好，对吧？从你看从C到C++，比如说模板，模板是一个非常非常重要的架构。但是在你看到为了实现各种各样的功能，在C++11/14/17之前，这个模板被滥用到了，对吧？就boss里面那些模板没有人能看得懂，大家不知道那是对尤其是对于同学来说，大家都不知道那是什么，你需要花很长时间才才能理解他们对吧？他模板是一个很好的机制，但是长出了一些比较奇怪的奇怪的东西。所以他给Java你看他给Java提供了一些一些建议，他主张只加三样这个原工具范型很重要，没有范型你构造抽象的时候，你是得像C那样对吧？或者早期的Java那样，到处都有强制类型转换，然后运算符重载。好像Java到至今都没有加入轻量用户资定一类，然后这个现在是有的。对。他讲了这样的一个架构的故事，那我们也可以问。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_45.jpeg" data-desc-position="bottom"><img alt="画面 00:44:00" src="../assets/07/07_45.jpeg"></a></p>
+<p><strong>[00:44:56]</strong> 我们每一个同学都有自己的偏好，然后你们每一个同学问出来的问题就是不一样的。然后不一样的时候就会有不一样的结果。这场演讲是一条关于growability的架构哲学。呃。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_46.jpeg" data-desc-position="bottom"><img alt="画面 00:45:00" src="../assets/07/07_46.jpeg"></a></p>
+<p><strong>[00:45:26]</strong> 扩展必须是一等公民，对吧？扩展必须是一等公民，而且扩展可以之间可以组合，这就是一个可生长的架构。它不是说好我有一个需求清单，然后我把这个需求清单全部都实现了，这叫正确。我们做OJ有一个就有一点，从你们进大学开始？疯狂的做各种各样的OJ题，他就把你们训练成了解题的机器。因为做OJ是不需要任何扩展的，你这个题对了，你就这个代码是不需要维护？你用后即扔的代码，你就会有一种不自觉的像这种用后即扔去走的倾向。好，然后就把你们在这个方面的思考变少了，然后某种程度上这门课会拉回来一点，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_47.jpeg" data-desc-position="bottom"><img alt="画面 00:46:00" src="../assets/07/07_47.jpeg"></a></p>
+<p><strong>[00:46:20]</strong> 扩展必须是一等公民给原语和组合机制，而不是用力清单，我们可以照着需求清单去写写实现。但是如果我们把这个需求分解成跳出问题看问题的几个概念，然后这个概念又可以变成具体的，比如说领域里面的东西好，然后可以可以组合，那这可能就是一个对的对的设计。好，我就不继续看了。你们最开始的时候，比如说你们刚开始大二大三的时候，读这些东西肯定是非常慢的。</p>
+<p><strong>[00:46:57]</strong> 因为你因为刚才我说，我们是从你已知的知识开始往外推。我现在读论文就很快，是因为我的已知的知识相对来说比较多，而且AI可以帮我整理。那你在建立一个比较好的computer science的核心知识之前，你都会经历一个比较痛苦的过程，就是你不理解为什么。好消息是你可以都跟AI来询问这个啊各种各样的事情。对，好，所以我觉得我有个comment就是有太多的宝藏被埋在这个快速发展的时代里面了。我们我就就大家同学们到了进组了，大家一定是我们最近又发表了一篇什么of art的文章，师兄又发表一篇self的文章。然后我觉得某种程度上，大家的品味就被这些海量的人类 slop和AI slop都污染了。就比如说CDN上面的东西，防止自学的教科书。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_48.jpeg" data-desc-position="bottom"><img alt="画面 00:47:00" src="../assets/07/07_48.jpeg"></a></p>
+<p><strong>[00:47:56]</strong> 然后就这里看到我今天举的两个只是非常随意的例子。可能这些经典就有成百上千这样。我觉得就在在我到我读书的时候，从我比如说本科高年级到我博士毕业的这段时间里面，我我我可能我是不可能把他们都读完的，所以我只读了他们其中的一部分，我算是读书读的比较多的人，也只是很少的一部分。然后有一些自己的想法。但是在今天你们每一个人都可以？每一个人都可以快速的，而且是原汁原味的去去了解到里面的作者想要传达的原始的想法。所以我就非常期待一个大学毁灭计划，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_49.jpeg" data-desc-position="bottom"><img alt="画面 00:48:00" src="../assets/07/07_49.jpeg"></a></p>
+<p><strong>[00:48:45]</strong> 我们我们有没有可能从就就把比如说大一的第一门课programming language就把知识点全拆散了。我们我们不用一本什么，甚至是这个教科书，可能是你们上课的这个老师写的教科书。我们不用这个教科书，我们把这个原始的知识全部都break down，对吧？把1970年、1980年、1990年那些经典的东西全部都拆开来，然后重新串联起来为你生成一个教材对吧？我觉得这个是一个挺好挺好玩的挺好玩的事情。好，这几个是架构的吧？我从Growing a Language，他说一个能够生长的架构才是最好的架构。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_50.jpeg" data-desc-position="bottom"><img alt="画面 00:49:00" src="../assets/07/07_50.jpeg"></a></p>
+<p><strong>[00:49:31]</strong> 那这个架构设计的空间到底有哪些经典的案例呢？第一个当然就是大名鼎鼎的unix philosophy，三条原则，每一个工具do one thing and do it well，然后write programs to work together，write programs handle text streams? 第三条其实是一个非常精髓的设计。因为文本接口统一了人和程序程序和程序的接口。人如果只是binary的字节流的话，对人来说是很不友好的。所以你们在用数据库的时候，你们都知道数据库好，对吧？但是用数据库的时候，你总是觉得隔了一层杀。因为就是你每一次查询任何东西都需要一个SQL query，然后这个SQL query对你来说是indirect的，而你只是想要一个立即的东西，你人不是很适应在做任何事的时候都要加一层indirection。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_51.jpeg" data-desc-position="bottom"><img alt="画面 00:50:00" src="../assets/07/07_51.jpeg"></a></p>
+<p><strong>[00:50:24]</strong> 当然模型可以对吧？比如说你可以让模型每说一句话以后都说一个喵，对吧？他能遵循指令。但如果是人来遵循这个指令的时候，人就会觉得非常非常痛苦了。而这个想法其实在1964年的时候就已经发现了。</p>
+<p><strong>[00:50:40]</strong> 然后我们可以同样是原文？这时候你就看到你有一个AI可以帮你收集资料？一个agent能帮你收集资料，后并且能够帮你总结原文的时候，这就是原文这个四个要点，第一个像接花园水管一样连接程序到管道。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_52.jpeg" data-desc-position="bottom"><img alt="画面 00:51:00" src="../assets/07/07_52.jpeg"></a></p>
+<p><strong>[00:51:01]</strong> 在应该是1983年的时候引入unix但其实你看这一条在那个时候就已经有了这个想法了。然后你看它后面有很多其他的关于操作系统设计的非常经典的想法对吧？动态的动态链接，这个酷的索引，然后你看到这些对今天的这个呃系统设计都是有非常深远的深远的影响对吧？</p>
+<p><strong>[00:51:33]</strong> Unix然后unix就是依套一套unix世界里面的语言。当然你们也可能看过那个叫unix hater guide，就各种吐槽unix里面的这种设计的设计的不好。但是就是一套统一的标准，所有的命令行工具都遵循大致一样的命令行参数，这样人就可以理解了，人很好理解。然后而且他们输出的这个格式也尽可能的保持一致。因为当有几大工具，比如说sed、AWK这种工具奠立了技术以后，程序的输出也开始向这几个工具友好的方向，同时对人也对工具友好的方向来继续以及这个退出状态？exit status它可以在程序出问题的时候及时的告诉另外一个程序。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_53.jpeg" data-desc-position="bottom"><img alt="画面 00:52:00" src="../assets/07/07_53.jpeg"></a></p>
+<p><strong>[00:52:25]</strong> 好，就这几个加上管道，这就是一个非常棒的机制。比如说当我们需要比如说你们要设计一个软件，然后这个软件需要一个打开文件的菜单。那这个打开文件的菜单要么就是它自己实现一个，要么就是使用操作系统的。但如果你对这两个都不满意，你有办法吗？没有办法，对吧？</p>
+<p><strong>[00:52:54]</strong> 你想一想，学校买了PR对吧？买了那个PR我记得P的就是倒闭全家桶里面那些打开好像是他自己的菜单，因为它可能会提供一些预览这样的功能。然后在那个菜单你说它好用，它好用的时候挺好用，说难用，它不符合符合你使用习惯的时候很难用。然后如果你是一个操作系统的打开文件文档文件的窗口，那也不是那么的好用，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_54.jpeg" data-desc-position="bottom"><img alt="画面 00:53:00" src="../assets/07/07_54.jpeg"></a></p>
+<p><strong>[00:53:23]</strong> 虽然它集成了绝大部分常用的功能，但unix里面这个答案不一样。比如说我现在想要为我的任何一个东西，对吧？比如说我现在用vim或者用Emacs我们不圣战，对吧？你用任何一个都可以，或者用nano，我有没有nano？好，我有。这个我想给他配一个菜单，我就可以配一个我自己的菜单，然后就得到了一个。</p>
+<p><strong>[00:53:49]</strong> 你看这是一个打开文件的菜单，这就是工具的组合性，它这个模块对吧？因为unix当然这是一个偶然可能在系统的设计者也没有想想到那么多那么多事情。但比如说我就可以随便随便找一个，比如说第一课的index，我就用nano打开它了。所以看到share这个share的文本接口和编程语言，还有unix的管道文本接口，它是一脉相承的。把它放在一起，你就有一个无限组合和复用的空间，允许你写程序。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_55.jpeg" data-desc-position="bottom"><img alt="画面 00:54:00" src="../assets/07/07_55.jpeg"></a></p>
+<p><strong>[00:54:27]</strong> 所以我上操作系统课的时候，我经常说你们都是程序员。你们在用Linux用unix的那一刻起，你每个人都是程序员。因为你做的每一个命令，它都是一个小程序。然后这个小程序就是负责把各种各样的do one thing and do it well的工具给组合起来，这种可组合性是非常关键的。到今天你都很难在一个GUI 程序里面得到这样的组合性。那我觉得这样的ground br东西也是可以应该是可以做的出来的。可以畅想一下，这是unix。</p>
+<p><strong>[00:55:00]</strong> 然后第二个也是大家熟悉的例子，其实我已经讲过几次了，就是关系数据库对吧。A relation model of dataas a basis for protecting user from formmatted data system from potentially disruptive changing in datarepresentation caused by growth in the data bank and changes in traffic。也就是说，如果你用文件系统去管理数据，你就面对一个raw interface。它的好处是unix世界里面的工具可以复用，它的坏处是你你太过自由，以至于它没有这种统一的管理。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_56.jpeg" data-desc-position="bottom"><img alt="画面 00:55:00" src="../assets/07/07_56.jpeg"></a></p>
+<p><strong>[00:55:35]</strong> 然后这个关系代数，他做了一个非常了不起的，当然我觉得就是因为我我自己做过一段时间的程序合成，然后发现我一但凡我要做这个和人类世界相关的这程序合成，我们绕不开的就是1970年的这个论文。它它其实是对世界建立一个模型。他说我们的世界里面的数据可以用这个二维表，对吧？我相相信大家应该是熟悉的，就用好多好多的表和表之间的一些操作来表示。然后你也几乎可以用这个表和表之间的，比如说中云这样的操作来处理任何你所需要的数据管理。而这个数据怎么管，怎么存，它可靠不可靠，全部交给底下的数据库系统的实现。也就是说在这个关系代数的基础上，我们有了结构化的查询语言。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_57.jpeg" data-desc-position="bottom"><img alt="画面 00:56:00" src="../assets/07/07_57.jpeg"></a></p>
+<p><strong>[00:56:36]</strong> 这个语言你看也是一个语言，上面unix shell bash也是一个语言，然后这个SQL也是一个语言。所以当你grow一个东西的时候，一个东西可以grow的时候，它多多少少都会带一个语义的性质。它是一个接口，然后这个接口它足够的灵活，所以它就会像一个编程语言，SQL有了SQL，然后有了查询优化器，然后有了事物以后，那就数据库在任何时候，这个二维表都是当前世界的一个状态。然后这个状态经过一次数据库的transaction会到下一个状态。然后这个数据库还可以有视图，比如说we？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_58.jpeg" data-desc-position="bottom"><img alt="画面 00:57:00" src="../assets/07/07_58.jpeg"></a></p>
+<p><strong>[00:57:17]</strong> 我当前的状态可以用一个查询来创建一个我对这个世界当前世界的理解。而且数据库系统的实现给了我们可以近乎无限scale的能力，对吧？到今天我们都可以的，数据依然可以无限的scale，然后我们就可以用这样的一个信息系统。所以数据库其实带起了整个人类世界的数据信息化的一波很大的浪潮。</p>
+<p><strong>[00:57:47]</strong> 你想图书馆里的书可以信息化，学籍管理你的系统可以信息化，你的财务的信息可以信息化，在线商城的订单可以信息化，所有东西都可以用这个relational database来表示，它是逻辑关系，它表示了实体和实体之间的逻辑关系。只要把这个逻辑关系理清楚，你就可以在现实世界里面实现信息系统。这也是一个非常顶级的？隔离了复杂性的抽象，而且它有无穷的扩展能力。它只规定说我这个世界里面有表database schema，但这个schema是什么？可以由你来扩展，由你来决定为这个应用来来定制。然后第三个案例就是Internet，Internet也是一个非常典型的案例，它解决一个非常简单的问题，我今天为什么可以站在那上课？上课的时候我同时还在推流，然后我推流的时候，我的手机同时还能监看我推流的结果和弹幕，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_59.jpeg" data-desc-position="bottom"><img alt="画面 00:58:00" src="../assets/07/07_59.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_60.jpeg" data-desc-position="bottom"><img alt="画面 00:58:41" src="../assets/07/07_60.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_61.jpeg" data-desc-position="bottom"><img alt="画面 00:58:45" src="../assets/07/07_61.jpeg"></a></p>
+<p><strong>[00:58:48]</strong> 他把整个世界给连起来了，然后这个连起来它也是一个可以成长的架构。他希望的是我要做一个架构，他他负责他能够解决这个系统里面一部分的问题。比如说你当我用TCP的时候，你再也不用担心这个数据传输到底可靠不可靠。我无论什么样的数据流都可以稳定可靠的从一个点送到另外一个点，对吧？从我的手机上和另外世界上另外一头的某一个点连起来都是没有问题的。然后在至于上面跑什么样的应用程序，跑什么样应用程序，我能够支持什么就支持什么，不要做预设。所以你可以读一下这个，我觉得还是这个也是非常非常非常经典对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_62.jpeg" data-desc-position="bottom"><img alt="画面 00:59:00" src="../assets/07/07_62.jpeg"></a></p>
+<p><strong>[00:59:40]</strong> RFC 1958，rc 191958，architecture principle of the Internet, 1996年6月架构的原则。唯一应该永存的原则就是变化本身。这个原则就是说他要承载这个世界的变化。所以他就做一件事情网络networking。他要做一件事情目标就是connectivity。然后在connectivity的基础上，上面就会有很多的应用可以爆发出来，但是他不管对吧？甚至比如说现在有些数据中心甚至还在用TCP/IP，虽然现在有更好的吧？如果你要真的要在，比如说要在GPU之间传输数据，那可能需要更好的协议。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_63.jpeg" data-desc-position="bottom"><img alt="画面 01:00:00" src="../assets/07/07_63.jpeg"></a></p>
+<p><strong>[01:00:34]</strong> 网络只管高效传data，但是这个传的时候还有很多细节，比如说像提示B点有这种拥塞控制这种难题，然后还有这种断连连接的管理，对吧？连接的中断什么时候就决定这个连接就中断了。然后这些是非常重要的，它架构里面需要包含的设计，然后其他的基本上就全部都交给别人。好，在这个基础上他做好了这个connectivity这一件事，上面的世界其实变了很多。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_64.jpeg" data-desc-position="bottom"><img alt="画面 01:01:00" src="../assets/07/07_64.jpeg"></a></p>
+<p><strong>[01:01:06]</strong> 早在早期的时候，我跟大家说过，我读书的时候整还没有现在这个全网HTTPS，我们都是在HTTP 上裸奔的。然后在线上裸奔的时候，我们都是直接用telnet去连到南京大学小百合BB去灌水的。但今天你看他那显然是已经安全性等等都达不到我们要的要求。</p>
+<p><strong>[01:01:28]</strong> 我们有SSH，然后在我那个时候传出文件时，用的FTP。F tp为什么好呢？FTP是因为它协议里面本身就支持断点续传，所以那个时候我们I一下电影，在校内里面下电影下下的非常开心。我因为我下那个时候网络可能不是很稳定，或者反正经常有问题，或者我下到一半的时候，我可能就要我要停下来。但我下一次我可以从这个断点继续传输，在协议里面支持了。但今天他就显得也是因为没有安全等等。</p>
+<p><strong>[01:02:00]</strong> 虽然可能有安全的扩展，但是今天做软件变容易了。所以我们可以把这些功能全部实现在HTP的一个接口里。所以HTTPS又变成了一个有点像这个TCP/IP的上一层，今天你访问所有的这个microservices，你的所有的你只要出了你的本地的东西和Internet上面的另外一个服务商，全部都是HTTPS，然后他有这个re的api的这样的一个规范。当然是建议的，你可以不遵你可以不严格严格遵循它在这个体系上面又长出了很多的东西，在共同的规则之上持续的更换局部。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_65.jpeg" data-desc-position="bottom"><img alt="画面 01:02:00" src="../assets/07/07_65.jpeg"></a></p>
+<p><strong>[01:02:42]</strong> 所以就好像是他建设了一个城市的交通网络，然后这个建筑它就一直都在不断的向前演进。这几个是其实是大家比较熟悉的例子。你们会在就为什么要在你们学大学里面学这些课程，对吧？当然你肯定是要学一些具体的技术。比如说你有一天你真的会出去写写 SQL对，真的有一天你脱网的时候，你真的需要一个SQL的时候，你可能你还得自己手写一下，你得有有概念对着手才能能写写出来。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_66.jpeg" data-desc-position="bottom"><img alt="画面 01:03:00" src="../assets/07/07_66.jpeg"></a></p>
+<p><strong>[01:03:15]</strong> 但另一个方面，你更多的是看到这些沉淀下来的经典，它为什么能成为经典？这些系统当然我讲的是可能它偏软件架构的这一方面，它是怎么样应对变化。你可以体会为什么这样的一个好的设计，它可以支撑起一个生态，应对这些变化。当然我们还是要讲软件工程的？这是生成式软件工程，这个呃我们还是要讲软件的架构的，我们在在刚才的这种systems里面看到了一些。因为systems是最它它是为了提供支撑应用的通用抽象层，所以它会特它让一半要做的特别好，才能在很长的演化里面存活下来，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_67.jpeg" data-desc-position="bottom"><img alt="画面 01:04:00" src="../assets/07/07_67.jpeg"></a></p>
+<p><strong>[01:04:02]</strong> 从IBM System/360是一个非常经典的系统，然后到unix面向对象的编程语言，Internet android android我应该会专门有一次课来来讲。然后到比如说云原生里面的这种，那我们有没有面向客户需求的软件架构呢？对吧？软件架构当系统这一层都打好了，地基打好了以后，我们有了操作系统，在操作系统上面有了数据库，然后在操作系统上面有了Internet。这个舞台其实就已经为人类搭建好了各种各样的业务逻辑系统、教务系统、图书管理系统就全部都可以上线了，对吧？</p>
+<p><strong>[01:04:44]</strong> 那我们在这个已经打好的抽象层的基础上，我们能做什么呢？很自然的想法，如果你你你今天想象你回到1998年或者回到2000年，你要设计为我们的学校或者为企业设计软件系统。你手上有的Internet数据库操作系统，你最直接的想法就是你为每一个页面或者为每一个功能都做成是一个SQL的transaction对吧？因为数据库已经完成了物理世界过程在信息世界里面的投影，对吧？它就是一个好多表格的这样的一个分解。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_68.jpeg" data-desc-position="bottom"><img alt="画面 01:05:00" src="../assets/07/07_68.jpeg"></a></p>
+<p><strong>[01:05:28]</strong> 我们刚才说是由数据库的事务驱动这个状态的变化，而我们可以把需求这时候你就能对上，你就可以可以理解为什么那些软件工程的书你看不明白。那些软件工程书他要这样写。他要把这个需求软件工程做的事，或者说如果你要构建业务系统做的事，就是把需求投射成不同的对吧？也就是一个分解不同的需求点，然后每个需求点变成一个数据库的transaction，然后以及我可以为这个当前的状态提供各种各样的数据库的视图，数据库视图也是一个查询。比如说我想要看有哪些学生选择了我的这一门生成式软件工程课程，那我就会写写一个select对吧？这样把把这个数据库的视图的某种程度上，你可以理解成是一个一个切片拿出来，然后这个切片就可以显示在某一个地方，这样我们就得到了一个最最经典的应用程序的架构。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_69.jpeg" data-desc-position="bottom"><img alt="画面 01:06:00" src="../assets/07/07_69.jpeg"></a></p>
+<p><strong>[01:06:38]</strong> 然后这个架构一定程度上其实是可以就在这个需在在这个需求点，相对就每一个需求点都是一个数据库事物查询的时候，这个架构其实是非常好的这架构其实是非常好的。然后直接有一波应用的浪潮。在包括这有有好几个因素，包括这个操作系统CRUD数据库和Internet。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_70.jpeg" data-desc-position="bottom"><img alt="画面 01:07:00" src="../assets/07/07_70.jpeg"></a></p>
+<p><strong>[01:07:06]</strong> 以及刚才我讲到那个呃OOPSLA的keynote里面，他讲Java语言的设计。那个时候1998年Java如日中天的时候，Java在允许我们直接在HTML里面写代码。当然这个不是一个很新的想法。比如说今天我们你们你们如果要对这也是一个很好的架构，叫模板语言。你们有没有过自己写一个AI应用，然后你需要自己定制一个prompt。我不知道你们有没有过这个需求，然后你们怎么拼prompt的？如果你们想要，你想要prompt的你们会怎么样？是prompt的等于A加B加C这样拼，你可以这样拼，然后加上一个sorry，写好多prompt，然后再加上什么D再加上你们会这样写prompt的吗？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_71.jpeg" data-desc-position="bottom"><img alt="画面 01:08:00" src="../assets/07/07_71.jpeg"></a></p>
+<p><strong>[01:08:09]</strong> 一个更好的办法是用一个模板语言对吧？比如说你把prompt说说写一个user什么，然后比如说你的instructions，你用一个又是一个语言，这是一个可扩展的语言。然后这个语言的它有一个语义是你可以在渲染这个模板的时候给它传一个叫instructions的变量，然后它会把这个字符串就直接贴在这，这样你的prompt就变得好维护了。如果你有一个Python表达式，你就很难维护掉。比如说你有一个用Python环境一个two的模板，你可以把很多东西，比如说今天的日期对吧？你可能需要今天的日期，你就可以把日期传入传入传传入这里。</p>
+<p><strong>[01:08:56]</strong> 然后这个feature最早大概你看在PHP的时候就已经探索怎么样在页面里面嵌入服务端的脚本了。然后在这个Java时代对吧？Java时代它有对它有几种不同的写法，早期的时候是这样写，很像，对吧？一个一个它可以把Java代码和HTML模板嵌在一起，嵌在一起以后甚至你看这只可以起循环。这个像比如说你今天看君家兔里面也有这样的功能，有了这样的功能以后，我们开发就是开发这种以数据库为中心的应用就变得前所未有的容易了，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_72.jpeg" data-desc-position="bottom"><img alt="画面 01:09:00" src="../assets/07/07_72.jpeg"></a></p>
+<p><strong>[01:09:39]</strong> 我只需要我的每一个数据库应用，尤其是一个页面，我只需要一个database transaction，把所有的我需要的数据都捞出来。比如说存放到一些list里，存放到一些map里。然后他把map就直接用这种方式投射成一个HTML的页面。而里面还有一个很好的设计，它把这个DOM 的树和样式给分开了，对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_73.jpeg" data-desc-position="bottom"><img alt="画面 01:10:00" src="../assets/07/07_73.jpeg"></a></p>
+<p><strong>[01:10:07]</strong> CSS 和 HTML不管样式，但是我可以通过给不同的element不同的样式，我可以排出几乎任何形式的界面，对吧？这样信息系统就可以做了。我可以在这放我再可以在这放button，我再可以在这放任何代码生成的动态的东西。这样你就可以看到为什么像图书管理系统在那个时候就集中式的爆发了。然后在这里面就有了其实是这个想法，就在每个页面都是一个SQL transaction导出了一个非常重要的模式，叫做MVC model-view-controller。我们也读一下。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_74.jpeg" data-desc-position="bottom"><img alt="画面 01:11:00" src="../assets/07/07_74.jpeg"></a></p>
+<p><strong>[01:11:04]</strong> 对，他就是一个非常小的。</p>
+<p><strong>[01:11:13]</strong> 一个两页纸的这个页纸，1972年1979年，尤其models represent knowledge对吧？就是一个single point of当前对当前世界的knowledge。谁选的什么课，有哪些订单，然后vi是一个visual representation of its model。所以所谓的will就是我要看到的will是一个function of state，然后这个function是个pure function。所以你不希望这个we有能够有任何改变这个的能力。如果你希望你如果你希望有一个操作可以改变这个世界，你就需要一个controller。A controller is the link between a, the system, it provides user with input by a drain forrelevant wheels to present ly placon screen output by priuser with manuals are the meanings of givencommands and data.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_75.jpeg" data-desc-position="bottom"><img alt="画面 01:12:00" src="../assets/07/07_75.jpeg"></a></p>
+<p><strong>[01:12:10]</strong> 所以他就把这个就是把需求的能修改的点翻译成transaction，然后把你看到东西变成状态的一个投射，非常干净的一个架构。然后像也很自然，它会成为任何信息系统的一个标准的架构。比如说如果你要实现一个教务系统的话，model就是这个课程选课记录各种。然后view就是你看到的那个页面，然后controller就是你各种按钮点下来，或者那输入框点下来，它它相应的会得进入一个数据库的事务。</p>
+<p><strong>[01:12:46]</strong> 好，这是大家熟悉的。那这有什么问题呢？这有什么问题呢？问题是你如果如果是在HTML单页面的模式，就只有一个HTML页面的时候。然后每次你点一个按钮以后，这个页面都会重新刷新，重新更新的时候，这个其实是成立的。但是在今天我们的界面上有大量的元素，他们的状态是不在这个model里面的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_76.jpeg" data-desc-position="bottom"><img alt="画面 01:13:00" src="../assets/07/07_76.jpeg"></a></p>
+<p><strong>[01:13:22]</strong> 比如说我们可以展开随时可以展开一个菜单，对吧？展开菜单或者我有一个搜索框，你们都都用过这个功能吧。呃，我现在有一个视图，有一个view然后这个view比如说是学生的列表，然后这个学生的列表一定是有一个搜索框。比如说我要找哪一个名字的同学，找一个对找或者找一个学号。然后教务系统讨厌的地方就是搜索被做成了一个某种一个一个一个database transaction。我需要在搜索框里面先输入，然后输入完了以后点搜索，然后他把这个搜索结果反馈给我。然后有的时候种他已经把这个列表给我了以后，我只需要一个过滤器。然后这个过滤器不涉及到任何的model的状态的改变，也不会去再去查这个model。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_77.jpeg" data-desc-position="bottom"><img alt="画面 01:14:00" src="../assets/07/07_77.jpeg"></a></p>
+<p><strong>[01:14:17]</strong> Model已经已经视图已经在视图里了，但我仍然需要对视图的状态做改变。有些我临时的修改我的的那些element，对吧？我的鼠标移过一个元素的，它应该亮起来这些然后这些它其实也需要一个model，但这个model不应该存在数据库里。所以为什么不把real state也当成是一个model呢？然后你就发明了这个MVVM对吧？就现在比较时髦的，就最近比较时髦的一个一个一个一个概念。我看我有没有时间，ok我还有一点时间，我们有两个和MVVM有关系的设计。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_78.jpeg" data-desc-position="bottom"><img alt="画面 01:15:00" src="../assets/07/07_78.jpeg"></a></p>
+<p><strong>[01:15:01]</strong> 其实我我觉得我自己我我我我不引起圣战，我自己更偏向于这个Reactt。因为Reactt有一个就 view 对开发者来说是比较直观的。如果你写过一点前端，你立即就可以上手这个 Vue，然后Reactt来说它更纯粹一点。他希望的是保留这个模型，保留我们我们的也就是说我们看到的东西，网页上面看到东西是整个数据库的一个投射。然后这个是view上面还可以有一个状态，比如说我是不是ho了，有没有某一个东西被ho了，然后我的querystring qustr是什么？它可以有一些自己的页面上面的状态，然后这些状态随时可以改对吧。我有一个我这个qustring是映射到一个文本框的，然后这个文本框和这个的状态是绑定的，当然也可以绑定这个状态。然后这个hover也是的，它每一个每个element都可能都有一个是否hover的however边的状态。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_79.jpeg" data-desc-position="bottom"><img alt="画面 01:16:00" src="../assets/07/07_79.jpeg"></a></p>
+<p><strong>[01:16:10]</strong> 然后他想说好，那我能不能就写一个函数说我的DOM tree，我把这数据库擦掉，我的DOM tree就等于functionof这个你能不能就直接定义这个函数，我定一个pure function，一个没有任何副作用的函数。我输入这个我输入当前的所有的界面上面的状态，然后我就可以把这个DOM 树给算出来。好，这肯定可以对吧？</p>
+<p><strong>[01:16:46]</strong> 可以是可以，但这里有一个非常严重的问题是性能。你的网页上面可以能有几万个元素，然后你当当你的这个question改变的时候，开query str当，你当你这里你进入了一个字符的时候，那整个状态全部都要重算。所以他就在这个系统里面做了大量的这种virtual DOM的工作，来把这些复杂性给藏起来。你只要按照我的模型来声明什么时候，状态是什么，状态是怎么变的，剩下你就全部都不要管他帮你更新。然后Vue 更像是他帮你组建了一个依赖关系图，然后你你你写的时候，当你写的时候你写这样的input等于什么的时候，它就会建立一个依赖关系，然后帮你保持同步。其实两个差不多，而且随着随着好像Vue新版本的发布，他们好像变得更像了。但是我们用的比较少，所以我没有没有这个发言权。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_80.jpeg" data-desc-position="bottom"><img alt="画面 01:17:00" src="../assets/07/07_80.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_81.jpeg" data-desc-position="bottom"><img alt="画面 01:18:00" src="../assets/07/07_81.jpeg"></a></p>
+<p><strong>[01:18:06]</strong> 但你看到在这里就这两个框架，它设计的思路都需要你隔离复杂性。你希望的是你可以把有些变的东西和不变的东西要分分离开来分离开来，然后把逻辑和数据的源头要分离开来。这样你可以分开管理，你因为我们是small head，我们头很小。那我们如果关注状态的时候，最好就不要关注这个状态是怎么变成dom m的。然后在我关注到，等我状态完全确定以后，我再看怎么把这个状态翻译成我的dom m对吧？</p>
+<p><strong>[01:18:45]</strong> 这样都是由这两个都是由状态决定，界面都是一个pure function，但是更新的模型稍微有一点不一样。好，这是你们现在可能比如说做一些前端开发会比较熟悉的。但是MVCMVVM他们没有解决真正的essential complexity，尤其是面向长流程真正的长流程的任务。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_82.jpeg" data-desc-position="bottom"><img alt="画面 01:19:00" src="../assets/07/07_82.jpeg"></a></p>
+<p><strong>[01:19:21]</strong> 比如说你。假设你要实现一个淘宝，当然你你你不会去实现这么复杂的东西。淘宝的麻烦在哪里呢？你说下单好，下单没问题。然后下单以后他的流程之后会涉及到，比如说下单以后你库存要锁定，锁定完了以后你要计算优惠，然后计算优惠以后你要支付，然后注意这个支付是需要用户确认的，然后支付完了以后你会风控发货、退款、售后对账。所以这个业务流程你用一个状态，就刚才我们做了一个其实做了一个不切实际的假设，就是我们用当前状态来表示这个世界。那当然ok没问题，可以用二维表来表示。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_83.jpeg" data-desc-position="bottom"><img alt="画面 01:20:00" src="../assets/07/07_83.jpeg"></a></p>
+<p><strong>[01:20:12]</strong> 那我在当前状态下，我怎么表示我这个订单到底进行到哪一步了呢？你们最直接的方法就是在这个数据库里面？放一张表叫order。然后order里面这个order这个表里面有一列叫做status，然后series里面有一个有一，再比如有一个一就代表是在这个下单，对吧？如果是一是下单，二是库存，三是什么，或者你可以把它展开来对吧？Order你也可以order展开来，比如说是不是下单，库存支有没有支付对吧？然后比如说它有一个go go go go go好，然后这个时候这个状态机就会变得非常复杂了。而且你你可能遇到的问题是在某一个节点上，比如说触发了风控以后，你需要设计它返回的逻辑，然这是一个essential complexity对吧？这是这个业务系统里面的逻辑。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_84.jpeg" data-desc-position="bottom"><img alt="画面 01:21:00" src="../assets/07/07_84.jpeg"></a></p>
+<p><strong>[01:21:27]</strong> 然后随着这个业务系统越长越大，比如不管是这样的管理订单的系统，还是比如说教务系统里面的一个学生，你会发生发现什么呢？你会发现有的学生处于既可以毕业又不能毕业的状态，因为他hack的时候就有的时候你总是在某一个流程上面，比如程序有bug，你的程序有一个bug，你的程序也可能是有一个特批，导致某一个地方被override了。本来这个地方应该封应该触发的，但是其实没有问题的。然后这个风控它就由另外一个人override了。然后在这个系统里面，因为有错综复杂的逻辑，最后就会变成处于一个风控失败的状态。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_85.jpeg" data-desc-position="bottom"><img alt="画面 01:22:00" src="../assets/07/07_85.jpeg"></a></p>
+<p><strong>[01:22:11]</strong> 但是它进入了下一个环节，那这个数据到底是什么呢？你怎么解读呢？这种不一致的数据，它甚至有的时候你的数据都是silently corrupt的。我相信我们学校的教务系统里面有无穷多这样。因为经常手操工程师，手操教务系统里面有很多这种就根本就不对不一致的数据在里面。</p>
+<p><strong>[01:22:33]</strong> 反正好像最后没有影响这个同学毕业，然后他也就只能只能不管了。这就因为我们的业务流程，它可能是一整条很长的流程。他既要编码过去，又要编码现在，又要编码未来，对吧？所以本质上这是现在的状态的一个快照，但这个快照是由过去推演过来的，他怎么过来的？这个丢了以后你这个一不一致，其实就会就就会比较复杂。然后我先举一个更简单一点的例子，你们有没有同学记过账？就比如说支付宝会给你一个记账，但如果如果你如果你想要真正严肃的记账，它会会计实际上是有一个要求的，叫做复式记账法。那我们也可以。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_86.jpeg" data-desc-position="bottom"><img alt="画面 01:23:00" src="../assets/07/07_86.jpeg"></a></p>
+<p><strong>[01:23:32]</strong> 它是为了防错，它就是为了防止这种数据库不一致。这种不一致就当你发生不一致的时候，他能够检查出来他要求每一笔交易都同时计入两个或者以上的账户，且金额相等，方向相反，对吧？你看他说只记一条，简单，但是无法反映业务的完整结构，也不具备自平衡的校验能力。你看它可以试算平衡它跟人类发明这种东西，就是因为一个当前状态，它很有可能是corrupted是不对的。那他要把这个为什么不对，一定程度上要给呃要要要给要要给找出来。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_87.jpeg" data-desc-position="bottom"><img alt="画面 01:24:00" src="../assets/07/07_87.jpeg"></a></p>
+<p><strong>[01:24:25]</strong> 对，然后他有一个，你们不需要知道，你们不需要知道这是什么，我也不知道它是什么，但是我有这个记账的需求。然后我有这个记账需求的时候，我当然可以就用这个信息系统的方式来，在做一张一个叫资产负债表的东西，对吧？比如说我可以介绍一下。比如说我现在就有一个需求，我就是要记一个资产负债表。然后这个资产负债表大概就是长这样的，有什么现金存货、固定资产、应付账款、短期借款、所有者权益等等。然后这个是相当于如果你要以合符合这个会计法规的方式记账，就必须要得到一张这样的表。但是我对会计没有任何的支持，那我我我要怎么样设计一个软件的架构能够帮我，对吧？在在我不知道就没有任何知识的情况下，设计一个好的信息系统？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_88.jpeg" data-desc-position="bottom"><img alt="画面 01:25:00" src="../assets/07/07_88.jpeg"></a></p>
+<p><strong>[01:25:31]</strong> 这时候我就用了一番sourting我就用了一番，索性我干了这样的一件事儿，我不再是记录当前的状态，而是。我记录所有状态的迁移，就是我我记录这个数据结构有很多办法。我可以记录这个数据结构当前的状态，我也可以记录这个数据结构是怎么怎么来的。所以我其实就是一笔流水账，流水上。比如说今天是收了1000块钱，然后明天又减了1000块钱，然后是为什么？好，但我不会记账，我没有设计那个数据库系统，没有设置那个数据。而我设计的是我直接让AI设计了一个这样的东西，我设计了一个小的像编译器一样的东西，然后我有很多的记账的动作，就是我我就实际这是这实际中，从最终需要交付的那个资产负债表里面所有可能的条目里面提取出来的。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_89.jpeg" data-desc-position="bottom"><img alt="画面 01:26:00" src="../assets/07/07_89.jpeg"></a></p>
+<p><strong>[01:26:45]</strong> 然后比如说我要我要我要付钱，比如说我要付一个营业成本的钱，那每付出一份我都会在这些表格上面。比如说货币资金会怎么样，所有者权益会怎么样，这个应付账款会怎么样，然后在现金流量表上会发生什么？然后你看到这个表格完全是AI生成的，我就选择相信AI对吧？选择相信AI以及相信最终最终那个校验会找到这里面是不是会有任何的问题。然后接下来我做了一个什么样的架构设计呢？我做了一个什么样架构设计呢？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_90.jpeg" data-desc-position="bottom"><img alt="画面 01:27:00" src="../assets/07/07_90.jpeg"></a></p>
+<p><strong>[01:27:31]</strong> 我用LM做编译器，就就这是一个persist history，就是不可篡改的就发生了什么。比如说我今天我要我要允许某一个不能毕业的同学毕业，我也必须要在这里面写一个意思说我要允许什么毕业。然后这样的一个流水账的条目会用LLM编译成刚才你们看到的那一个小的操好多小的操作。然后当前的状态是由所有的这个操作reduce得到的，就相当于是每一个操作都会说好我的这个资产负债表要怎么改，第二张表要怎么改，现金流量表要怎么改。然后每一个操作最后把它replay一遍就得到了当前的我可以比如说提交出去的这个资产负债表，当然在这这是这个总体的架构，然后这里面还有很多小的架构。比如说我这里用了一个cover呃g写的代码很糟糕，就一开始写的非常长的代码，然后我就用了一个小的trick把它合并起来。我可以给这个payroll加上一个参数，然后就它就可以得到一个payroll，相当于是这个参数state已经确定了，然后剩下的这样的一个一个函数一个函数编程里面非常常用的小的trick。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_91.jpeg" data-desc-position="bottom"><img alt="画面 01:28:00" src="../assets/07/07_91.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_92.jpeg" data-desc-position="bottom"><img alt="画面 01:29:00" src="../assets/07/07_92.jpeg"></a></p>
+<p><strong>[01:29:09]</strong> 然后好处就是记账就不再是任何问题了。我可以把比如说这是一个实际上记账发生的条目，比如说我要银行收支，比如说隔一段时间就会银行收支会要整理一下。那它在报表上面体现的所有的side effect都会对吧？都会体现在这里。</p>
+<p><strong>[01:29:36]</strong> 然后我把它们全部都按时间顺序一遍，就得到了当前的当前的报表，这是一万。然后从这个例子里面，我们看到什么呢？如果我们设计一个信息系统，就我刚才说如果你用这个database去管理信息，那你的database很自然的，你管理的是现在对吧？</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_93.jpeg" data-desc-position="bottom"><img alt="画面 01:30:00" src="../assets/07/07_93.jpeg"></a></p>
+<p><strong>[01:30:01]</strong> 现在学校里面的状态是什么？每一个学生是什么？我们学校里面有哪些课程对吧？每个学期有哪些课程？它代表一个当前的事实，然后这个状态是可变的。状态可变就意味着你一旦你的逻辑有错，逻辑改变你状态就很容易造成不一致。你会从一个对的状态走到一个错的状态。</p>
+<p><strong>[01:30:29]</strong> 而刚才我们讲什么样的好架构是好的呢？你能够生长的架构是好的，对吧？能够容纳。比如说突然多了一个多了一个新的需求，或者过去的某一个规则改掉了，然后当过去的规则改掉的时候，你这个时候你就需要为状态生成一个patch对吧？你就需要为状态生成一个补丁，然后这个状态的补丁数据库的迁移就是一个非常危险的操作。</p>
+<p><strong>[01:30:58]</strong> 因为你你到底决定？比如说培养方案改了错了，修正了，成绩更正了。成绩更正会带来大量的后果。比如说你的成绩从及格到不及格。打个比方，这个老师假设这位同学你想去要分，然后老师说你不要要了，然后你非要要查卷子。然后查了卷子以后，老师发现当时救了你一手，本来你最后那个题空着的，还给了你20分。然后好，那这样好了，他查了卷子只能把这20分扣掉，然就挂了。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_94.jpeg" data-desc-position="bottom"><img alt="画面 01:31:00" src="../assets/07/07_94.jpeg"></a></p>
+<p><strong>[01:31:35]</strong> 然后挂了以后，他对这个数据库就是一个一个修改，一个可能就是不在原来业务逻辑里面的修改，对数据库是摧毁性的。因为你这门课从挂了以后，你的学分数要减1，然后你的学分数又会引起你能不能毕业，能不能准出，能不能选下一门课。就是你的数据库内部其实已经不一致了。打个比方，你已经选上了它的先修你要选修操作系统，你要先修计算机系统基础，然后你计算机系统基础通过了，所以你选上了操作系统。然后你现在计算机系统基础挂科了，你还能选操作系统吗？它内部它天生就是不一致的，这个以essential complexity里有大量的这种依赖关系，我依赖你你你依赖我。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_95.jpeg" data-desc-position="bottom"><img alt="画面 01:32:00" src="../assets/07/07_95.jpeg"></a></p>
+<p><strong>[01:32:27]</strong> 好，那这个时候如果是一个当前状态的database，好的，你这个课好像这个成绩对吧？成绩和是否挂科这一栏你就从一改成0。但是你对数据库剩下的部分你到底做了什么？你是很难评估的，很容易漏掉，很容易。所以为什么要用event sourcing呢？Event sourcing是说你不要你做的事情不是维护一个当前状态，而是你要搞清楚所有的原始数据之间的dependency。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_96.jpeg" data-desc-position="bottom"><img alt="画面 01:33:00" src="../assets/07/07_96.jpeg"></a></p>
+<p><strong>[01:33:02]</strong> 比如说从一个这样的一个LM编译器，从一个记账条目到一个操作，这也可能会错的对吧？这也可能会错的。但是错了以后，比如说我当期的这个账，我我我会有人工来审核审核。如果发现这个错了以后，我可以把它修改过来，我不会付出任何的代价，对吧？这个翻译错我就直接把它改正就可以了。然后如果我真的发生了一个，比如说像刚才我说的操选课选选课这个选课你影响其他的课程，你在这样的一个架构里面你就会知道，对吧？你改了这个事实，比如说改了，然后我还换一个对吧？</p>
+<p><strong>[01:33:53]</strong> 比如说选课，比如说你你你通过比如这个同学通过了这个IS课，然后通过了S以后，有很多东西事后算出来的。然后当这个东西发生了反转以后。因为你不维护当前的状态，你有所有的计算，你可以把这个计算重新全部做一遍。你哪怕用一个自动的数据流分析，你都知道通过S从通过到不通过，它可能会影响哪些结论，因为你把data flow就make explicit了，而不是以状态的形式藏在那个当前状态里。而且one还有很可以带来很多非常好玩的特点。因为它是这个replay base的，它是replay based，你我当前的状态完全是由过去决定的，所以我可以用它来推演未来的状态。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_97.jpeg" data-desc-position="bottom"><img alt="画面 01:34:00" src="../assets/07/07_97.jpeg"></a></p>
+<p><strong>[01:34:49]</strong> 所以对我来说，我的记账系统最大的好处实际上是我可以假设，比如说打比方这个流程里下单锁库存优惠计算，我现在在支付上，那么我现在可以在这个位置上直接推演出，就因为这个架构天生就支持，我可以推演出如果风控成功状态会到什么样？如果风控失败状态会怎么样。也就是说如果我有个账本，我其实我可以在这个event source的基础上去评估我到底会不会破产，我破产的概率有多少，我只要有一个模型，我只要知道比如说我应收账款有多少回不来，我就会破产，我就能够评估我的这个？为对未来做这样的评估，这都是一个好的架构所能够所所能能够带来的所以event sourcing为什么在解决这些问题的时候，会显得稍微要好一些。它没有办法消除这些esessential complexity，就这些依赖关系，我的先修课程的依赖关系，我的毕业的依赖关系，这些都是可以都是事实已经存在的，但是event把事实视图和预期它分开了。然后如果世界没有按照你的预期发展，你就通过追加新的事实，就你不需要让那个工程师去手改一个数据库，然后让这个数据库进入越来越糟糕的状态，而是你可以追加一个。我现在领导认为这个同学就是可以毕业，其所有的东西都不管了，你就让他毕业。然后因为有这个偶的，所以可以他他可以他可以毕业。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_98.jpeg" data-desc-position="bottom"><img alt="画面 01:35:00" src="../assets/07/07_98.jpeg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_99.jpeg" data-desc-position="bottom"><img alt="画面 01:36:00" src="../assets/07/07_99.jpeg"></a></p>
+<p><strong>[01:36:38]</strong> 所以如果你你这个跳出问题，看问题的话，就一句话，现在是过去的结果。所以你有一个可查证可溯源的计算过程，你就显式地建模了这个系统里面各种各样的data dependency。虽然你没有就用一个数据结构去对吧？一个是data dependency graph。我这个数据是你可以在当前数据库里面说，我这个表的这个数据是依赖这个的这个是依赖这个的这个是依赖这个的，你没有做这样的，你还是一个计算逻辑，还是说我我因为有因为我因为我有这个通过了SS所以我这个学分要加加几？要加上这个SS的学分，我要从这个时候，通过SS课我就要取出在这个时刻SS课的学分。然后我知道这个学分是几以后，我就可以把它加上去。所以所有的这个计算逻辑都是可以溯源的？因为计算机系统基础课的学分可能是变的，你如果有event sourcing你就知道在当前这个时刻，计算机系统基础课的学分是几，你就不会出现对吧？确实我们减了学分，然后那你学分还够不够毕业的毕业的问题。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_100.jpeg" data-desc-position="bottom"><img alt="画面 01:37:00" src="../assets/07/07_100.jpeg"></a></p>
+<p><strong>[01:37:56]</strong> 对所以在这个意义上，我觉得SQL或者说关系代数它犯了一个billion dollar mistake。这个来自于Tony Hoare，他调侃自己他发明了空指针，然后他调侃自己是一个billion dollar mistake。因为有null pointer，就个程序crash，crash和火箭可能也爆炸了这样。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_101.jpeg" data-desc-position="bottom"><img alt="画面 01:38:00" src="../assets/07/07_101.jpeg"></a></p>
+<p><strong>[01:38:21]</strong> 然后其实关系代数的一个也我也不能讲设计缺陷。就在那个时候，它当然是一个非常可以扩展的架构，非常好的架构。但他为了管理数据的时候，他没有把任何图灵可计算的计算关系作为1st class citizen管起来。这个是relational database，它天生做的不是那么好的。也就是说如果我的database里面有两个，有两个field的，就像我能不能毕业对吧？就比如说学生里面有一个能不能毕业，然后这个毕业零或者一数据库几乎都会这样设计。因为你必须要快速的把它查询出来，对吧？它不能用关系大数据建模一个非常复杂的试图，建模一个非常复杂的计算，那么在这个时候这个零和一就成为了一个数据库里面不一致的潜在的点。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_102.jpeg" data-desc-position="bottom"><img alt="画面 01:39:00" src="../assets/07/07_102.jpeg"></a></p>
+<p><strong>[01:39:17]</strong> 然后现在的框架用各种不同的方式来找补。你会看到这个MVM Reactt data flow event都是试图把这种derived state和dependency显示化。所以我觉得去看一看这个老旧的东西，然后再去理解。比如说新设计为什么我们要做做一般会就会觉得比较有意思。</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/07/07_103.jpeg" data-desc-position="bottom"><img alt="画面 01:39:40" src="../assets/07/07_103.jpeg"></a></p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2026年10月2日 03:42:07 UTC"><span class="timeago" datetime="2026-10-02T03:42:07+00:00" locale="zh"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2026年10月2日 03:42:07 UTC">2026-10-02</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="创建日期">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"></path></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2026年10月2日 03:42:07 UTC"><span class="timeago" datetime="2026-10-02T03:42:07+00:00" locale="zh"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2026年10月2日 03:42:07 UTC">2026-10-02</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚">
+        
+          
+          <a href="../06-requirements-architecture-1/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 第 6 讲 · 需求和架构（一）">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                第 6 讲 · 需求和架构（一）
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../about/" class="md-footer__link md-footer__link--next" aria-label="下一页: 关于本站">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                关于本站
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      课程内容版权归原讲者所有 · 转录文本以 CC BY-NC-SA 4.0 分享
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.footer", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../js/timeago.min.js"></script>
+      
+        <script src="../../js/timeago_mkdocs_material.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
