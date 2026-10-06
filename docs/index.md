@@ -6,7 +6,7 @@
 
 | 讲次 | 主题 | 日期 | 时长 | 原视频 |
 | --- | --- | --- | --- | --- |
-| [第 1 讲](lectures/01-welcome-to-the-future.md) | 欢迎来到未来 | 2026-09-08 | 01:39:23 | [BV1qAa3z2EvA](https://www.bilibili.com/video/BV1qAa3z2EvA/) |
+| [第 1 讲](lectures/01-welcome-to-the-future.md) | 欢迎来到未来 | 2026-09-08 | 01:39:59 | [BV1pb8o6yE8f](https://www.bilibili.com/video/BV1pb8o6yE8f/) |
 | [第 2 讲](lectures/02-prompt-engineering.md) | 提示词工程 | 2026-09-09 | 01:38:26 | [BV1CQt365EzW](https://www.bilibili.com/video/BV1CQt365EzW/) |
 | [第 3 讲](lectures/03-repository-management.md) | 软件仓库管理 | 2026-09-10 | 01:40:13 | [BV1kybV6DE47](https://www.bilibili.com/video/BV1kybV6DE47/) |
 | [第 4 讲](lectures/04-repository-management-2.md) | 软件仓库管理（二） | 2026-09-15 | 01:38:29 | [BV1Q6en6NEUo](https://www.bilibili.com/video/BV1Q6en6NEUo/) |

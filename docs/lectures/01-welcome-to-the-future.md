@@ -2,7 +2,7 @@
 
 !!! quote "本讲信息"
     **课程**：南京大学《生成式软件工程》（蒋炎岩） · **日期**：2026-09-08  
-    **原视频**：[B 站 BV1qAa3z2EvA](https://www.bilibili.com/video/BV1qAa3z2EvA/) · **时长**：01:39:23  
+    **原视频**：[B 站 BV1pb8o6yE8f](https://www.bilibili.com/video/BV1pb8o6yE8f/) · **时长**：01:39:23  
     **说明**：非官方 fan-made 转录，仅作学习用途；内容版权归原讲者所有。转录错误以原视频为准。
 
 ---

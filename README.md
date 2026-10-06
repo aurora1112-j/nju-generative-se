@@ -10,7 +10,7 @@
 
 | # | 主题 | 日期 | 原视频 | PDF |
 | --- | --- | --- | --- | --- |
-| 01 | 欢迎来到未来 | 2026-09-08 | [B 站](https://www.bilibili.com/video/BV1qAa3z2EvA/) | [pdf/01-welcome-to-the-future.pdf](pdf/01-welcome-to-the-future.pdf) |
+| 01 | 欢迎来到未来 | 2026-09-08 | [B 站](https://www.bilibili.com/video/BV1pb8o6yE8f/) | [pdf/01-welcome-to-the-future.pdf](pdf/01-welcome-to-the-future.pdf) |
 | 02 | 提示词工程 | 2026-09-09 | [B 站](https://www.bilibili.com/video/BV1CQt365EzW/) | [pdf/02-prompt-engineering.pdf](pdf/02-prompt-engineering.pdf) |
 | 03 | 软件仓库管理 | 2026-09-10 | [B 站](https://www.bilibili.com/video/BV1kybV6DE47/) | [pdf/03-repository-management.pdf](pdf/03-repository-management.pdf) |
 | 04 | 软件仓库管理（二） | 2026-09-15 | [B 站](https://www.bilibili.com/video/BV1Q6en6NEUo/) | [pdf/04-repository-management-2.pdf](pdf/04-repository-management-2.pdf) |
